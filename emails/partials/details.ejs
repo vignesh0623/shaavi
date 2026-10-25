@@ -1,0 +1,40 @@
+<%#
+  Light blue panel: heading and description, then the details beside the
+  scientists photo. The two are inline blocks, so the photo wraps under the
+  details on narrow screens even without the phone styles (Outlook gets a
+  table). The soft glows are a background image; clients that ignore it
+  (Outlook) show the plain colour.
+  Locals: assetsUrl, heading, description, fields [{ icon, label, value, href }].
+%>
+<% const font = "font-family:'Poppins',Arial,Helvetica,sans-serif;"; %>
+<tr>
+<td bgcolor="#e6f3f9" background="<%= assetsUrl %>/panel-glow.jpg" style="background-color:#e6f3f9; background-image:url('<%= assetsUrl %>/panel-glow.jpg'); background-repeat:no-repeat; background-position:0 0; background-size:100% 100%;">
+<table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0">
+<tr>
+<td class="panel-pad" style="padding:16px 24px 0;">
+<h1 class="heading" style="margin:0; <%= font %> font-size:16px; font-weight:500; line-height:28px; color:#1b1b1b; text-transform:capitalize;"><%= heading %></h1>
+<p class="small" style="margin:2px 0 0; <%= font %> font-size:11px; line-height:18px; color:#444444;"><%= description %></p>
+</td>
+</tr>
+<tr>
+<td style="font-size:0; line-height:0;">
+<!--[if mso]><table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0"><tr><td width="265" valign="top"><![endif]-->
+<div class="column" style="display:inline-block; width:100%; max-width:265px; vertical-align:top;">
+<table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0">
+<tr>
+<td class="panel-pad fields" style="padding:27px 0 33px 24px;">
+<table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0">
+<% fields.forEach(function (field, index) { %><%- include("field", Object.assign({}, field, { first: index === 0 })) %><% }) %>
+</table>
+</td>
+</tr>
+</table>
+</div>
+<!--[if mso]></td><td width="264" valign="bottom"><![endif]-->
+<div class="column photo" style="display:inline-block; width:100%; max-width:264px; vertical-align:bottom; text-align:right;"><img src="<%= assetsUrl %>/scientists.png" width="264" height="210" alt="" style="display:inline-block; width:100%; max-width:264px; height:auto; border:0;"></div>
+<!--[if mso]></td></tr></table><![endif]-->
+</td>
+</tr>
+</table>
+</td>
+</tr>

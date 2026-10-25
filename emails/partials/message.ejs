@@ -1,0 +1,18 @@
+<%#
+  Darker panel with the visitor's message, quoted in italics; its line breaks
+  are kept (each line is escaped).
+  Locals: assetsUrl, messageTitle, text.
+%>
+<% const font = "font-family:'Poppins',Arial,Helvetica,sans-serif;"; %>
+<tr>
+<td class="panel-pad" bgcolor="#d9edf6" style="padding:24px; background-color:#d9edf6;">
+<table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0">
+<tr>
+<td style="<%= font %> font-size:12px; line-height:16px; letter-spacing:0.6px; color:#0087c6; text-transform:capitalize;"><img src="<%= assetsUrl %>/icon-message.png" width="16" height="16" alt="" style="display:inline-block; width:16px; height:16px; margin-right:9px; vertical-align:top; border:0;"><%= messageTitle %></td>
+</tr>
+<tr>
+<td style="padding-top:12px; <%= font %> font-size:12px; font-style:italic; line-height:22.75px; color:#1b1b1b; word-break:break-word;">&quot;<% text.split(/\r?\n/).forEach(function (line, index) { %><% if (index) { %><br><% } %><%= line %><% }) %>&quot;</td>
+</tr>
+</table>
+</td>
+</tr>

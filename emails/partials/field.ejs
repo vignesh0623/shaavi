@@ -1,0 +1,12 @@
+<%#
+  One detail in the panel: icon and label over the value (rows of a table).
+  Locals: assetsUrl, icon (file in assetsUrl), label, value, href (optional:
+  makes the value a link), first (no gap above it).
+%>
+<% const font = "font-family:'Poppins',Arial,Helvetica,sans-serif;"; %>
+<tr>
+<td style="padding-top:<%= first ? 0 : 14 %>px; <%= font %> font-size:11px; line-height:12px; color:#777777;"><img src="<%= assetsUrl %>/<%= icon %>" width="12" height="12" alt="" style="display:inline-block; width:12px; height:12px; margin-right:6px; vertical-align:top; border:0;"><%= label %></td>
+</tr>
+<tr>
+<td style="padding-top:6px; <%= font %> font-size:12px; font-weight:500; line-height:19px; color:#1d293d; word-break:break-word;"><% if (locals.href) { %><a href="<%= href %>" style="color:#1d293d; text-decoration:none;"><%= value %></a><% } else { %><%= value %><% } %></td>
+</tr>

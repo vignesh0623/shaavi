@@ -1,0 +1,15 @@
+{
+  "assetsUrl": "http://localhost:3000/emails",
+  "siteUrl": "http://localhost:3000",
+  "reference": "SHC-20260917-0047",
+  "submittedAt": "17 Sep 2026, 09:42 AM",
+  "contact": {
+    "firstName": "Jesse",
+    "surname": "James",
+    "email": "jesse@gmail.com",
+    "age": "34",
+    "phone": "+44 98201 34567",
+    "message": "I'd like to book a home collection for a full blood panel including thyroid, liver function, and HbA1c. Please let me know the earliest available slot this week.",
+    "whatsapp": false
+  }
+}

@@ -1,0 +1,17 @@
+<%#
+  Logo on the left, the message's reference on the right.
+  Locals: assetsUrl, siteUrl, reference.
+%>
+<% const font = "font-family:'Poppins',Arial,Helvetica,sans-serif;"; %>
+<tr>
+<td class="gutter header" style="padding:31px 37px 32px 34px;">
+<table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0">
+<tr>
+<td valign="middle" style="line-height:0;">
+<a href="<%= siteUrl %>" target="_blank" style="display:inline-block;"><img src="<%= assetsUrl %>/logo.png" width="70" height="19" alt="Shaavi Healthcare" style="display:block; width:70px; height:19px; border:0;"></a>
+</td>
+<td valign="middle" align="right" style="<%= font %> font-size:12px; line-height:16px; color:#1b1b1b; white-space:nowrap;"><%= reference %></td>
+</tr>
+</table>
+</td>
+</tr>

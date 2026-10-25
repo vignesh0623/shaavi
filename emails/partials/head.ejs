@@ -1,0 +1,66 @@
+<%#
+  Start of every Shaavi email: the <head> (resets, the Poppins font where
+  clients load it, phone styles), the hidden preview text and the 600px
+  container. The layout itself is inline-styled tables, so clients that drop
+  <style> (or Outlook, which ignores most CSS) still show the design.
+  Locals: title, preheader.
+%>
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:v="urn:schemas-microsoft-com:vml" xmlns:o="urn:schemas-microsoft-com:office:office">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="x-apple-disable-message-reformatting">
+<meta name="format-detection" content="telephone=no, date=no, address=no, email=no, url=no">
+<meta name="color-scheme" content="light">
+<meta name="supported-color-schemes" content="light">
+<title><%= title %></title>
+<!--[if mso]>
+<noscript><xml><o:OfficeDocumentSettings><o:AllowPNG/><o:PixelsPerInch>96</o:PixelsPerInch></o:OfficeDocumentSettings></xml></noscript>
+<style>body, table, td, p, a, span, h1 { font-family: Arial, Helvetica, sans-serif !important; }</style>
+<![endif]-->
+<!--[if !mso]><!-->
+<link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
+<!--<![endif]-->
+<style>
+  :root { color-scheme: light; supported-color-schemes: light; }
+  body { margin: 0; padding: 0; width: 100% !important; -webkit-text-size-adjust: 100%; -ms-text-size-adjust: 100%; }
+  table { border-collapse: collapse; mso-table-lspace: 0pt; mso-table-rspace: 0pt; }
+  img { border: 0; outline: none; text-decoration: none; -ms-interpolation-mode: bicubic; }
+  a { text-decoration: none; }
+  /* Keep iOS, Gmail and Samsung from restyling numbers and addresses as links. */
+  a[x-apple-data-detectors], u + #body a, #MessageViewBody a {
+    color: inherit !important; text-decoration: none !important; font-size: inherit !important;
+    font-family: inherit !important; font-weight: inherit !important; line-height: inherit !important;
+  }
+
+  /* ---- Phones (the design is 600px; tablets show it as is). Without these,
+     the side-by-side parts still wrap by themselves. ---- */
+  @media only screen and (max-width: 620px) {
+    .gutter { padding-left: 16px !important; padding-right: 16px !important; }
+    .header { padding-top: 24px !important; padding-bottom: 24px !important; }
+    .bar-title, .bar-date { display: block !important; max-width: none !important; }
+    .bar-title { padding-bottom: 4px !important; }
+    .bar-date { padding-top: 0 !important; text-align: left !important; }
+    .panel-pad { padding-left: 20px !important; padding-right: 20px !important; }
+    .heading { font-size: 18px !important; line-height: 26px !important; }
+    .small { font-size: 12px !important; line-height: 19px !important; }
+    .column { display: block !important; max-width: none !important; }
+    .fields { padding-bottom: 8px !important; }
+    .button-wrap { display: block !important; margin: 10px 0 0 !important; }
+    .button-wrap table { width: 100% !important; }
+    .button-wrap a { display: block !important; text-align: center !important; }
+    .footer { padding: 24px 20px !important; }
+    .footer-item { display: block !important; padding: 0 0 6px !important; }
+  }
+</style>
+</head>
+<body id="body" style="margin:0; padding:0; width:100%; background-color:#ffffff; -webkit-text-size-adjust:100%; -ms-text-size-adjust:100%;">
+<%# Inbox preview text; the filler stops the email's first lines showing after it. %>
+<div style="display:none; font-size:1px; line-height:1px; max-height:0; max-width:0; opacity:0; overflow:hidden; mso-hide:all;"><%= preheader %><% for (let i = 0; i < 40; i += 1) { %>&#847;&zwnj;&nbsp;<% } %></div>
+<table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="background-color:#ffffff;">
+<tr>
+<td align="center" style="padding:0;">
+<!--[if mso]><table role="presentation" align="center" width="600" cellpadding="0" cellspacing="0" border="0"><tr><td><![endif]-->
+<table role="presentation" class="container" width="600" cellpadding="0" cellspacing="0" border="0" style="width:100%; max-width:600px; margin:0 auto;">

@@ -1,0 +1,58 @@
+<%#
+  Sent to the Shaavi team when someone sends the Contact Us form (Figma
+  "Website" › Email Template, node 128:3256).
+
+  Locals:
+    assetsUrl    where public/emails is served, e.g. "https://www.shaavihealthcare.com/emails"
+    siteUrl      the website, e.g. "https://www.shaavihealthcare.com"
+    reference    the message's reference, e.g. "SHC-20260917-0047"
+    submittedAt  when it was sent, ready to show, e.g. "17 Sep 2026, 09:42 AM"
+    contact      the form's fields (ContactMessage in src/lib/contact.ts):
+                 firstName, surname, email, age, phone (with its dialling
+                 code, e.g. "+44 7700 900123"), message, whatsapp
+    company      optional { email, phone, address } for the footer
+    year         optional, for the copyright (defaults to this year)
+%>
+<%
+  const name = [contact.firstName, contact.surname].filter(Boolean).join(" ");
+  const phone = (contact.phone || "").replace(/[^\d+]/g, "");
+  const preview = contact.message.length > 90 ? `${contact.message.slice(0, 90).trimEnd()}…` : contact.message;
+  const replySubject = encodeURIComponent(`Re: Your message to Shaavi Healthcare (${reference})`);
+
+  const fields = [
+    { icon: "icon-user.png", label: "Full Name", value: name },
+    { icon: "icon-email.png", label: "Email", value: contact.email, href: `mailto:${contact.email}` },
+    contact.age && { icon: "icon-calendar.png", label: "Age", value: `${contact.age} years` },
+    phone && { icon: "icon-phone.png", label: "Mobile", value: contact.phone, href: `tel:${phone}` },
+    contact.whatsapp && { icon: "icon-whatsapp.png", label: "WhatsApp", value: "Yes, also send the reply on WhatsApp" },
+  ].filter(Boolean);
+
+  const buttons = [
+    { href: `mailto:${contact.email}?subject=${replySubject}`, label: "Reply via email", background: "#0087c6", icon: "icon-envelope-white.png" },
+    phone && { href: `https://wa.me/${phone.replace("+", "")}`, label: "Reply via Whatsapp", background: "#0e8727", icon: "icon-arrow-white.png" },
+    phone && { href: `tel:${phone}`, label: "Call User", background: "#1b1b1b", icon: "icon-phone.png", chip: true },
+  ].filter(Boolean);
+%>
+<%- include("partials/head", { title: `New message from ${name}`, preheader: `${name}: ${preview}` }) %>
+<%- include("partials/header") %>
+<tr>
+<td class="gutter" style="padding:0 37px 0 34px;">
+<table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0">
+<%- include("partials/bar", { barTitle: "New Contact Us submission received" }) %>
+<%- include("partials/details", {
+  heading: `${name} has submitted a new inquiry`,
+  description: "A contact form was submitted on the Shaavi Healthcare website. Please review the details below and follow up within one working day.",
+  fields,
+}) %>
+<%- include("partials/message", { messageTitle: "Patient Message", text: contact.message }) %>
+<%- include("partials/buttons", { buttons }) %>
+</table>
+</td>
+</tr>
+<tr>
+<td height="41" style="height:41px; font-size:0; line-height:0;">&nbsp;</td>
+</tr>
+<%- include("partials/footer", {
+  note: "This is an automated notification sent to the Shaavi Healthcare lab team. Do not reply to this email directly, use the buttons above to contact the patient.",
+}) %>
+<%- include("partials/foot") %>

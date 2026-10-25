@@ -1,0 +1,52 @@
+<%#
+  Thank-you sent to the visitor after they send the Contact Us form: the
+  team notification's design (contact-notification.ejs), with a copy of
+  their message and ways to reach the lab.
+
+  Locals: the same as contact-notification.ejs (assetsUrl, siteUrl,
+  reference, submittedAt, contact, and optionally company and year).
+%>
+<%
+  const name = [contact.firstName, contact.surname].filter(Boolean).join(" ");
+  const phone = (contact.phone || "").replace(/[^\d+]/g, "");
+  const companyPhone = (locals.company || {}).phone || "+44 1234 567890";
+
+  const fields = [
+    { icon: "icon-user.png", label: "Full Name", value: name },
+    { icon: "icon-email.png", label: "Email", value: contact.email },
+    contact.age && { icon: "icon-calendar.png", label: "Age", value: `${contact.age} years` },
+    phone && { icon: "icon-phone.png", label: "Mobile", value: contact.phone },
+    contact.whatsapp && { icon: "icon-whatsapp.png", label: "WhatsApp", value: "Yes, please also reply on WhatsApp" },
+  ].filter(Boolean);
+
+  const buttons = [
+    { href: `${siteUrl}/tests`, label: "Browse our tests", background: "#0087c6", icon: "icon-arrow-white.png" },
+    { href: `tel:${companyPhone.replace(/[^\d+]/g, "")}`, label: "Call us", background: "#1b1b1b", icon: "icon-phone.png", chip: true },
+  ];
+%>
+<%- include("partials/head", {
+  title: "We've received your message",
+  preheader: "Thanks for contacting Shaavi Healthcare. Our team will reply within one working day.",
+}) %>
+<%- include("partials/header") %>
+<tr>
+<td class="gutter" style="padding:0 37px 0 34px;">
+<table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0">
+<%- include("partials/bar", { barTitle: "We've received your message" }) %>
+<%- include("partials/details", {
+  heading: `Thank you for contacting us, ${contact.firstName}`,
+  description: `Our team will reply within one working day${contact.whatsapp ? ", by email and on WhatsApp" : ""}. Here's a copy of what you sent; please quote reference ${reference} if you get in touch about it.`,
+  fields,
+}) %>
+<%- include("partials/message", { messageTitle: "Your Message", text: contact.message }) %>
+<%- include("partials/buttons", { buttons }) %>
+</table>
+</td>
+</tr>
+<tr>
+<td height="41" style="height:41px; font-size:0; line-height:0;">&nbsp;</td>
+</tr>
+<%- include("partials/footer", {
+  note: "You're receiving this email because you sent a message through the Shaavi Healthcare website. If that wasn't you, you can ignore this email.",
+}) %>
+<%- include("partials/foot") %>

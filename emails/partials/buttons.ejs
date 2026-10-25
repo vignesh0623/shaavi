@@ -1,0 +1,19 @@
+<%#
+  Row of buttons, centred and 11px apart. They are inline blocks, so they
+  wrap onto more lines on narrow screens even without the phone styles
+  (which stack them full width); Outlook gets a table.
+  Locals: buttons [{ href, label, background, icon, chip }].
+%>
+<tr>
+<td align="center" style="padding-top:12px; font-size:0; line-height:0;">
+<!--[if mso]><table role="presentation" align="center" cellpadding="0" cellspacing="0" border="0"><tr><![endif]-->
+<% buttons.forEach(function (button) { %>
+<!--[if mso]><td style="padding:10px 5px 0 6px;"><![endif]-->
+<div class="button-wrap" style="display:inline-block; margin:10px 5.5px 0; vertical-align:top;">
+<%- include("button", button) %>
+</div>
+<!--[if mso]></td><![endif]-->
+<% }) %>
+<!--[if mso]></tr></table><![endif]-->
+</td>
+</tr>

@@ -1,0 +1,17 @@
+<%#
+  Dark strip over the panel: what the email is about and when the message
+  was sent. Two inline blocks that sit side by side and wrap (date under the
+  title) where the screen is narrow, even without the phone styles; Outlook
+  gets a table instead.
+  Locals: assetsUrl, barTitle, submittedAt.
+%>
+<% const font = "font-family:'Poppins',Arial,Helvetica,sans-serif;"; %>
+<tr>
+<td class="bar" bgcolor="#1b1b1b" style="padding:0 12px; background-color:#1b1b1b; font-size:0; line-height:0;">
+<!--[if mso]><table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0"><tr><td valign="middle"><![endif]-->
+<div class="bar-title" style="display:inline-block; width:100%; max-width:340px; padding:8px 0; vertical-align:middle; <%= font %> font-size:13px; line-height:16px; color:#ffffff;"><img src="<%= assetsUrl %>/icon-flask.png" width="12" height="12" alt="" style="display:inline-block; width:12px; height:12px; margin-right:6px; vertical-align:-2px; border:0;"><%= barTitle %></div>
+<!--[if mso]></td><td valign="middle" align="right"><![endif]-->
+<div class="bar-date" style="display:inline-block; width:100%; max-width:165px; padding:8px 0; vertical-align:middle; text-align:right; <%= font %> font-size:11px; font-weight:500; line-height:16px; color:#b6ddef; white-space:nowrap;"><%= submittedAt %></div>
+<!--[if mso]></td></tr></table><![endif]-->
+</td>
+</tr>
