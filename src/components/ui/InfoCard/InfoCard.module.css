@@ -1,0 +1,59 @@
+/* Label over value, with the icon in an 18px + 32px + 12px left inset. The
+   card is at least as tall as the icon (a pixel taller than the text). Figma
+   strokes take up no space, so the hairline is an inset shadow rather than a
+   border. */
+.card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  min-height: 56px;
+  padding: 12px 18px 12px 62px;
+  border-radius: 12px;
+  background: var(--color-white);
+  box-shadow: inset 0 0 0 0.5px var(--color-primary-light);
+}
+
+.icon {
+  position: absolute;
+  top: 12px;
+  left: 18px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  border-radius: 10px;
+  background: var(--color-primary-15);
+}
+
+.label,
+.value {
+  width: auto;
+}
+
+.label {
+  font-size: 13px;
+  line-height: 24px;
+  color: var(--color-placeholder);
+}
+
+.value {
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 30px;
+  color: var(--color-heading);
+}
+
+/* Without the card: the icon at the left edge and the text 12px past it. */
+.plain {
+  min-height: 32px;
+  padding: 0 0 0 44px;
+  background: none;
+  box-shadow: none;
+}
+
+.plain .icon {
+  top: 0;
+  left: 0;
+}

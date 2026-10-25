@@ -1,0 +1,10 @@
+.delivery {
+  width: 100%;
+  font-size: 13px;
+  line-height: 24px;
+  color: var(--color-heading);
+}
+
+.time {
+  color: var(--color-primary);
+}

@@ -1,0 +1,225 @@
+/*
+ * Decorations are positioned in the 1440px Figma frame's coordinates,
+ * measured from --frame-left (the frame's left edge, kept centred).
+ */
+.hero {
+  position: relative;
+  padding: 183px var(--gutter) 44px;
+  background: var(--color-white);
+}
+
+/* The glow's frame: the hero, which itself lets the search's panel overflow. */
+.clip {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.glow {
+  position: absolute;
+  top: -482px;
+  left: calc(var(--frame-left) - 604px);
+  width: 2606px;
+  max-width: none;
+  height: 1886px;
+  pointer-events: none;
+}
+
+.content {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 48px;
+  width: 822px;
+  margin: 0 auto;
+}
+
+.intro {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 34px;
+  width: 100%;
+  padding: 0 60px;
+}
+
+.title {
+  font-size: 42px;
+  font-weight: 500;
+  line-height: 50px;
+  text-align: center;
+  white-space: nowrap;
+}
+
+.subtitle {
+  width: 100%;
+  font-size: 16px;
+  line-height: 28px;
+  text-align: center;
+}
+
+/* The search is centred and as wide as the intro's text column. */
+.actions {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  width: 100%;
+  padding: 0 60px;
+}
+
+.actions .search {
+  width: 100%;
+}
+
+.categories {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  max-width: var(--content-width);
+  margin: 101px auto 0;
+}
+
+.categories > li {
+  display: flex;
+  flex: 0 1 196px;
+  min-width: 0;
+}
+
+.decor {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.decor > img {
+  position: absolute;
+  max-width: none;
+}
+
+.cellDivision {
+  top: 205px;
+  left: calc(var(--frame-left) + 1163px);
+  width: 288px;
+  height: 288px;
+  rotate: 12.77deg;
+  mix-blend-mode: luminosity;
+}
+
+.cellCluster {
+  top: 241px;
+  left: calc(var(--frame-left) - 215px);
+  width: 408px;
+  height: 408px;
+  scale: -1 1;
+  mix-blend-mode: luminosity;
+}
+
+.cellSphere {
+  top: 122px;
+  left: calc(var(--frame-left) + 92px);
+  width: 136px;
+  height: 136px;
+  mix-blend-mode: luminosity;
+}
+
+.microscope {
+  top: 136.778px;
+  left: calc(var(--frame-left) + 1168.361px);
+  width: 44px;
+  height: 67px;
+  rotate: -11.75deg;
+}
+
+/* ---- Responsive (desktop design above is untouched) ---- */
+
+/* Category cards keep their size and scroll sideways. */
+@media (max-width: 1199px) {
+  .categories {
+    max-width: none;
+    margin-inline: calc(-1 * var(--gutter));
+    padding: 0 var(--gutter) 4px;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    scroll-padding-inline: var(--gutter);
+    scrollbar-width: none;
+  }
+
+  .categories > li {
+    flex: 0 0 196px;
+    scroll-snap-align: start;
+  }
+}
+
+/* Mouse users get a slim scrollbar as a cue that the row scrolls. */
+@media (max-width: 1199px) and (pointer: fine) {
+  .categories {
+    padding-bottom: 12px;
+    scrollbar-width: thin;
+    scrollbar-color: var(--color-primary-30) transparent;
+  }
+}
+
+@media (max-width: 1023px) {
+  .hero {
+    padding-top: 150px;
+  }
+
+  .content {
+    width: 100%;
+    max-width: 822px;
+    gap: 40px;
+  }
+
+  .intro {
+    padding: 0;
+  }
+
+  .actions {
+    flex-direction: column;
+    align-items: stretch;
+    padding: 0;
+  }
+
+  .categories {
+    margin-top: 64px;
+  }
+}
+
+@media (max-width: 639px) {
+  .hero {
+    padding-top: 120px;
+  }
+
+  .intro {
+    gap: 24px;
+  }
+
+  .title {
+    font-size: 30px;
+    line-height: 38px;
+    white-space: normal;
+  }
+
+  .title br {
+    display: none;
+  }
+
+  .subtitle {
+    font-size: 15px;
+    line-height: 26px;
+  }
+
+  .actions .search {
+    height: 54px;
+    padding-left: 18px;
+  }
+
+  .categories {
+    margin-top: 48px;
+  }
+}

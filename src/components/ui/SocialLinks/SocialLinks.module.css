@@ -1,0 +1,22 @@
+.list {
+  display: flex;
+  align-items: center;
+  gap: 7.304px;
+}
+
+.link {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 27.757px;
+  height: 27.757px;
+  padding: 0.584px;
+  border: 0.584px solid rgb(255 255 255 / 0.1);
+  border-radius: 7.304px;
+  background: rgb(255 255 255 / 0.04);
+  transition: background-color 0.2s ease;
+}
+
+.link:hover {
+  background: rgb(255 255 255 / 0.12);
+}

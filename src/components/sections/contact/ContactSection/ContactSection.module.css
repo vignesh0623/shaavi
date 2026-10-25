@@ -1,0 +1,143 @@
+/* Clip the glow sideways only. The page sets `isolation` to keep the glow
+   (z-index: -1) above the page background. */
+.section {
+  position: relative;
+  padding: 133px 0 64px;
+  overflow-x: clip;
+}
+
+.glow {
+  position: absolute;
+  z-index: -1;
+  top: -516px;
+  left: calc(var(--frame-left) + 122px);
+  width: 1282px;
+  max-width: none;
+  height: 1196px;
+  pointer-events: none;
+}
+
+/* The design's 1277px row (x 61–1338) sits 20.5px left of centre: the
+   heading and details on the left, the form card on the right. */
+.inner {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 40px;
+  width: 1277px;
+  max-width: calc(100% - 2 * var(--gutter));
+  margin-inline: auto;
+  translate: -20.5px 0;
+}
+
+.info {
+  display: flex;
+  flex: 0 1 553px;
+  flex-direction: column;
+  gap: 62px;
+  min-width: 0;
+}
+
+.intro {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 34px;
+}
+
+.title {
+  font-size: 42px;
+  font-weight: 500;
+  line-height: 50px;
+}
+
+.description {
+  width: 465px;
+  max-width: 100%;
+  font-size: 16px;
+  line-height: 28px;
+}
+
+/* The design spaces the four details evenly down 252px. */
+.details {
+  display: flex;
+  flex-direction: column;
+  gap: 41.333px;
+}
+
+.link {
+  color: inherit;
+  transition: color 0.2s ease;
+}
+
+.link:hover {
+  color: var(--color-primary);
+}
+
+.form {
+  flex: 0 1 648px;
+  min-width: 0;
+  margin-top: 47px;
+}
+
+/* ---- Responsive (desktop design above is untouched) ---- */
+@media (max-width: 1339px) {
+  .inner {
+    translate: none;
+  }
+}
+
+/* One column: heading, details, then the form. */
+@media (max-width: 1023px) {
+  .section {
+    padding-top: 120px;
+  }
+
+  .inner {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 48px;
+  }
+
+  .info {
+    flex: none;
+    gap: 40px;
+  }
+
+  .details {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 28px 24px;
+  }
+
+  .form {
+    flex: none;
+    margin-top: 0;
+  }
+}
+
+@media (max-width: 639px) {
+  .section {
+    padding-top: 104px;
+    padding-bottom: 48px;
+  }
+
+  .intro {
+    gap: 24px;
+  }
+
+  .title {
+    font-size: 32px;
+    line-height: 40px;
+  }
+
+  .description {
+    font-size: 15px;
+    line-height: 26px;
+  }
+
+  .details {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 24px;
+  }
+}

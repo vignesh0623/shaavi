@@ -1,0 +1,42 @@
+.logo {
+  display: inline-flex;
+  flex-shrink: 0;
+  align-items: center;
+  gap: 8px;
+}
+
+.wordmark {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 7px;
+  line-height: normal;
+  white-space: nowrap;
+}
+
+.name {
+  --font-ascent: 1.05;
+  --font-descent: 0.35;
+  --font-cap-height: 0.701;
+
+  font-family: var(--font-sans);
+  font-size: 24px;
+  font-weight: 600;
+  color: var(--color-primary);
+}
+
+.tagline {
+  /* Inter metrics */
+  --font-ascent: 0.969;
+  --font-descent: 0.241;
+  --font-cap-height: 0.727;
+
+  font-family: var(--font-brand);
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--color-description);
+}
+
+.inverse .tagline {
+  color: var(--color-white);
+}

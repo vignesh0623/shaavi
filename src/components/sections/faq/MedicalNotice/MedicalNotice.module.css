@@ -1,0 +1,77 @@
+.notice {
+  display: flex;
+  align-items: flex-start;
+  gap: 36px;
+  width: 900px;
+  max-width: calc(100% - 2 * var(--gutter));
+  margin-inline: auto;
+}
+
+.photo {
+  width: 348px;
+  height: 317px;
+  border-radius: 24px;
+}
+
+.card {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 30px;
+  width: 483px;
+  min-height: 253px;
+  margin-top: 24px;
+  padding: 24px;
+  border-radius: 24px;
+  background: var(--color-white);
+}
+
+.title {
+  font-size: 18px;
+  font-weight: 500;
+  line-height: normal;
+  color: var(--color-primary);
+  white-space: nowrap;
+}
+
+.text {
+  width: 100%;
+  font-size: 12px;
+  line-height: 21px;
+  color: var(--color-description);
+}
+
+/* ---- Responsive (desktop design above is untouched) ---- */
+@media (max-width: 1023px) {
+  .notice {
+    flex-direction: column;
+    gap: 32px;
+  }
+
+  .photo {
+    width: 100%;
+    height: auto;
+    aspect-ratio: 348 / 317;
+    max-height: 420px;
+  }
+
+  /* The white card is invisible on the white page, so drop its inset
+     and let the text line up with the photo. */
+  .card {
+    width: 100%;
+    min-height: 0;
+    margin-top: 0;
+    padding: 0;
+    gap: 20px;
+  }
+}
+
+@media (max-width: 639px) {
+  .title {
+    white-space: normal;
+  }
+
+  .text {
+    font-size: 13px;
+  }
+}

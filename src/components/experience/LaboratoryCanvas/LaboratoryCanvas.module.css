@@ -1,0 +1,28 @@
+/*
+ * Spans the whole page, one layer below its content (the page sets
+ * `isolation`), and never takes clicks or focus. The canvas inside sticks
+ * to the viewport while the page scrolls.
+ */
+.track {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+}
+
+.track > canvas {
+  position: sticky;
+  top: 0;
+  display: block;
+  width: 100%;
+  /* The large viewport height doesn't change as mobile toolbars slide away,
+     so the canvas isn't resized while scrolling. */
+  height: 100vh;
+  height: 100lvh;
+  opacity: 0;
+  transition: opacity 1.6s ease;
+}
+
+.track[data-ready] > canvas {
+  opacity: 1;
+}

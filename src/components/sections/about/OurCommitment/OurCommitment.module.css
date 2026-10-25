@@ -1,0 +1,136 @@
+.panel {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 40px;
+  width: 1295px;
+  max-width: calc(100% - 2 * var(--gutter));
+  margin-inline: auto;
+  /* 1px border + 59px = the design's 60px inset. */
+  padding: 59px 60px 60px;
+  border-top: 1px solid rgb(255 255 255 / 0.15);
+  border-radius: 40px;
+  background: var(--color-heading);
+  color: var(--color-white);
+}
+
+/* In the design this row runs 32px into the panel's right padding. */
+.row {
+  display: flex;
+  align-self: stretch;
+  align-items: center;
+  gap: 29px;
+  margin-right: -32px;
+  padding-bottom: 32px;
+  border-bottom: 0.5px solid var(--color-stroke);
+}
+
+.lead {
+  display: flex;
+  flex-direction: column;
+  flex-shrink: 0;
+  align-items: flex-start;
+  justify-content: center;
+  gap: 29px;
+  width: 605px;
+  padding-right: 12px;
+  border-right: 0.5px solid var(--color-white);
+}
+
+.heading {
+  width: 100%;
+  font-size: 26px;
+  font-weight: 400;
+  line-height: 37px;
+}
+
+.intro {
+  width: 100%;
+  font-size: 16px;
+  line-height: 27px;
+}
+
+.body {
+  width: 485px;
+  font-size: 14px;
+  line-height: 25px;
+}
+
+.tagline {
+  font-size: 24px;
+  font-weight: 500;
+  line-height: 34px;
+  white-space: nowrap;
+}
+
+.highlight {
+  color: var(--color-primary);
+}
+
+/* ---- Responsive (desktop design above is untouched) ---- */
+@media (max-width: 1279px) {
+  .lead {
+    flex: 1 1 0;
+    width: auto;
+  }
+
+  .body {
+    flex: 1 1 0;
+    width: auto;
+  }
+}
+
+@media (max-width: 1023px) {
+  .panel {
+    padding: 47px 40px 48px;
+  }
+
+  .row {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 28px;
+    margin-right: 0;
+  }
+
+  .lead,
+  .body {
+    flex: none;
+  }
+
+  .lead {
+    padding: 0 0 28px;
+    border-right: 0;
+    border-bottom: 0.5px solid rgb(255 255 255 / 0.3);
+  }
+
+  .tagline {
+    white-space: normal;
+  }
+}
+
+@media (max-width: 639px) {
+  .panel {
+    gap: 32px;
+    padding: 35px 24px 36px;
+    border-radius: 28px;
+  }
+
+  .lead {
+    gap: 20px;
+  }
+
+  .heading {
+    font-size: 22px;
+    line-height: 32px;
+  }
+
+  .intro {
+    font-size: 15px;
+    line-height: 26px;
+  }
+
+  .tagline {
+    font-size: 20px;
+    line-height: 30px;
+  }
+}

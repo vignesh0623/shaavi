@@ -1,0 +1,144 @@
+.profile {
+  display: flex;
+  align-items: flex-start;
+  gap: 80px;
+  max-width: var(--content-width);
+  margin-inline: auto;
+  padding: 36px;
+  border-radius: 40px;
+  background: var(--color-primary-06);
+}
+
+.reverse {
+  flex-direction: row-reverse;
+}
+
+/* 400×421 at the design size; children are placed in % of it. */
+.portrait {
+  --frame-w: 400;
+  --frame-h: 421;
+
+  position: relative;
+  flex-shrink: 0;
+  width: 400px;
+  aspect-ratio: 400 / 421;
+}
+
+.frame {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  border-radius: 50px;
+}
+
+.frame::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: var(--color-primary-30);
+}
+
+.photo {
+  object-fit: cover;
+}
+
+.cutout {
+  position: absolute;
+  top: calc(var(--cutout-y) / var(--frame-h) * 100%);
+  left: calc(var(--cutout-x) / var(--frame-w) * 100%);
+  width: calc(var(--cutout-w) / var(--frame-w) * 100%);
+  max-width: none;
+  height: calc(var(--cutout-h) / var(--frame-h) * 100%);
+}
+
+.cutoutRounded {
+  border-radius: 0 0 50px 50px;
+}
+
+.badge {
+  position: absolute;
+  top: calc(var(--badge-y) / var(--frame-h) * 100%);
+  left: calc(var(--badge-x) / var(--frame-w) * 100%);
+}
+
+.content {
+  display: flex;
+  flex: 1 0 0;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 36px;
+  min-width: 1px;
+}
+
+.heading {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 24px;
+  width: 100%;
+}
+
+.name {
+  font-size: 24px;
+  font-weight: 500;
+  line-height: normal;
+  white-space: nowrap;
+}
+
+.bio {
+  display: flex;
+  flex-direction: column;
+  gap: 29px;
+  width: 100%;
+  font-size: 14px;
+  line-height: 24px;
+}
+
+/* ---- Responsive (desktop design above is untouched) ---- */
+@media (max-width: 1339px) {
+  .profile {
+    margin-inline: var(--gutter);
+  }
+}
+
+@media (max-width: 1199px) {
+  .profile,
+  .reverse {
+    flex-direction: column;
+    gap: 40px;
+    padding: 32px;
+  }
+
+  .portrait {
+    width: min(400px, 100%);
+  }
+
+  /* Keep the badge inside the photo once it no longer has room beside it. */
+  .badge {
+    top: auto;
+    right: 16px;
+    bottom: 16px;
+    left: auto;
+  }
+}
+
+@media (max-width: 639px) {
+  .profile,
+  .reverse {
+    gap: 32px;
+    padding: 24px 20px;
+    border-radius: 28px;
+  }
+
+  .frame {
+    border-radius: 36px;
+  }
+
+  .cutoutRounded {
+    border-radius: 0 0 36px 36px;
+  }
+
+  .name {
+    font-size: 22px;
+  }
+}

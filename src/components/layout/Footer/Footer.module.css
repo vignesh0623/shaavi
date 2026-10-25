@@ -1,0 +1,293 @@
+.footer {
+  /* Montserrat metrics (see globals.css) */
+  --font-ascent: 0.968;
+  --font-descent: 0.251;
+  --font-cap-height: 0.7;
+
+  /* At the bottom of the screen when the page is shorter (the body is a
+     flex column). */
+  margin-top: auto;
+  /* 1px border + 59px = the design's 60px inset (Figma strokes don't
+     take layout space). */
+  padding: 59px var(--gutter) 60px;
+  border-top: 1px solid rgb(255 255 255 / 0.15);
+  background: var(--color-heading);
+  color: var(--color-white);
+  font-family: var(--font-footer);
+}
+
+.inner {
+  display: flex;
+  flex-direction: column;
+  gap: 36px;
+  max-width: var(--content-width);
+  margin: 0 auto;
+}
+
+.columns {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.text {
+  font-size: 14px;
+  line-height: 22px;
+  white-space: nowrap;
+}
+
+/* Column 1 — brand */
+.brand {
+  display: flex;
+  flex-direction: column;
+  flex-shrink: 0;
+  align-self: stretch;
+  align-items: flex-start;
+  gap: 24px;
+  width: 526px;
+}
+
+.brandInfo {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 24px;
+  width: 100%;
+}
+
+.contacts {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+/* On touch screens a tap may land half-way to the next one (18px). */
+.contact {
+  --tap-y: 9px;
+
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.contact:hover,
+.link:hover {
+  color: var(--color-primary);
+}
+
+/* 1px border + 9px padding = the design's 10px inset. */
+.powered {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  padding: 9px;
+  border: 1px solid var(--color-primary);
+  border-radius: 8px;
+}
+
+.poweredLabel,
+.directionsLabel {
+  /* Poppins metrics */
+  --font-ascent: 1.05;
+  --font-descent: 0.35;
+  --font-cap-height: 0.698;
+}
+
+.poweredLabel {
+  font-family: var(--font-sans);
+  font-size: 12px;
+  line-height: normal;
+  white-space: nowrap;
+}
+
+/* Column 2 — quick links */
+.quickLinks {
+  display: flex;
+  flex: 1 0 0;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 36px;
+  min-width: 1px;
+}
+
+.heading {
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 22px;
+  text-transform: capitalize;
+  white-space: nowrap;
+}
+
+.links {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 24px;
+  width: 100%;
+}
+
+.link {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  transition: color 0.2s ease;
+}
+
+.bullet {
+  flex-shrink: 0;
+  width: 4px;
+  height: 4px;
+  border-radius: 0.667px;
+  background: var(--color-primary);
+}
+
+/* Column 3 — address & socials */
+.reach {
+  display: flex;
+  flex: 1 0 0;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: space-between;
+  height: 227px;
+  min-width: 1px;
+}
+
+.reachInfo {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 36px;
+  width: 100%;
+}
+
+.location {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 24px;
+  width: 100%;
+}
+
+.address {
+  font-style: normal;
+}
+
+/* 1px border + 15px padding = the design's 16px inset. */
+.directions {
+  display: flex;
+  align-items: center;
+  gap: 3px;
+  height: 32px;
+  padding: 0 15px;
+  border: 1px solid var(--color-primary);
+  border-radius: 100px;
+  transition: background-color 0.2s ease;
+}
+
+.directions:hover {
+  background: var(--color-primary-20);
+}
+
+.directionsLabel {
+  font-family: var(--font-sans);
+  font-size: 12px;
+  line-height: normal;
+  color: var(--color-primary);
+  white-space: nowrap;
+}
+
+/* Bottom bar */
+.bottom {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  /* 1px border + 36px = the design's 37px inset. */
+  padding-top: 36px;
+  border-top: 1px solid var(--color-primary-20);
+}
+
+.copyright {
+  font-size: 14px;
+  font-weight: 300;
+  line-height: 22px;
+  white-space: nowrap;
+}
+
+.credit {
+  font-weight: 500;
+}
+
+.legal {
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-end;
+  gap: 25.245px;
+  height: 21.037px;
+  font-size: 12px;
+  line-height: 22px;
+  white-space: nowrap;
+}
+
+.legalLink {
+  display: block;
+  transition: color 0.2s ease;
+}
+
+.legalLink:hover {
+  color: var(--color-primary);
+}
+
+/* ---- Responsive (desktop design above is untouched) ---- */
+@media (max-width: 1023px) {
+  .footer {
+    padding-block: 47px 48px;
+  }
+
+  .columns {
+    flex-wrap: wrap;
+    gap: 48px 32px;
+  }
+
+  .brand {
+    width: 100%;
+  }
+
+  .quickLinks,
+  .reach {
+    flex: 1 1 220px;
+  }
+
+  .reach {
+    gap: 36px;
+    height: auto;
+    justify-content: flex-start;
+  }
+
+  .bottom {
+    flex-wrap: wrap;
+    gap: 20px 32px;
+  }
+}
+
+@media (max-width: 639px) {
+  .text,
+  .copyright {
+    white-space: normal;
+  }
+
+  .bottom {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 20px;
+  }
+
+  .legal {
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    gap: 12px 24px;
+    height: auto;
+  }
+}

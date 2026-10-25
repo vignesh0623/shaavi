@@ -1,0 +1,31 @@
+/* `isolation` keeps the intro's glow (z-index: -1) above the page
+   background while it shows through behind the document. */
+.page {
+  isolation: isolate;
+  padding-bottom: 171px;
+}
+
+/* Page rhythm: the gaps between sections, taken from the Figma frame. */
+.document {
+  margin-top: 60px;
+}
+
+@media (max-width: 1023px) {
+  .page {
+    padding-bottom: 96px;
+  }
+
+  .document {
+    margin-top: 56px;
+  }
+}
+
+@media (max-width: 639px) {
+  .page {
+    padding-bottom: 72px;
+  }
+
+  .document {
+    margin-top: 40px;
+  }
+}

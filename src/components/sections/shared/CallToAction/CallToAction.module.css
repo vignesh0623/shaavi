@@ -1,0 +1,151 @@
+/*
+ * Decorations are positioned in the 1440px Figma frame's coordinates,
+ * measured from --frame-left (the frame's left edge, kept centred).
+ */
+.section {
+  position: relative;
+  height: 424px;
+  overflow: hidden;
+  background: var(--color-white);
+}
+
+.glows,
+.decor {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+.glow {
+  position: absolute;
+  width: 1330px;
+  max-width: none;
+  height: 1330px;
+}
+
+.glowTopLeft {
+  top: -690px;
+  left: calc(var(--frame-left) - 500px);
+}
+
+.glowBottom {
+  top: 24px;
+  left: calc(var(--frame-left) + 9px);
+}
+
+.glowRight {
+  top: -270px;
+  left: calc(var(--frame-left) + 672px);
+}
+
+.content {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 34px;
+  width: 822px;
+  margin: 0 auto;
+  padding: 72px 60px 0;
+}
+
+.title {
+  width: 100%;
+  font-size: 32px;
+  font-weight: 500;
+  line-height: 47px;
+  text-align: center;
+  white-space: nowrap;
+}
+
+.text {
+  width: 614px;
+  font-size: 16px;
+  line-height: 28px;
+  text-align: center;
+}
+
+/* This button is inset 20px / 10px in the design, not the usual 18px / 12px. */
+.content .button {
+  padding-right: 10px;
+  padding-left: 20px;
+}
+
+.decor > img {
+  position: absolute;
+  max-width: none;
+}
+
+.cellDivision {
+  top: 129.055px;
+  left: calc(var(--frame-left) + 50.055px);
+  width: 246.153px;
+  height: 246.153px;
+  rotate: 102.09deg;
+  mix-blend-mode: luminosity;
+}
+
+.cellSphereLarge {
+  top: 168px;
+  left: calc(var(--frame-left) + 1199px);
+  width: 181px;
+  height: 181px;
+  mix-blend-mode: luminosity;
+}
+
+.cellSphereSmall {
+  top: 119px;
+  left: calc(var(--frame-left) + 1117px);
+  width: 70px;
+  height: 70px;
+  mix-blend-mode: luminosity;
+}
+
+/* ---- Responsive (desktop design above is untouched) ---- */
+@media (max-width: 1023px) {
+  .section {
+    height: auto;
+    padding-block: 72px;
+  }
+
+  .content {
+    width: 100%;
+    max-width: 822px;
+    padding: 0 var(--gutter);
+  }
+
+  .text {
+    width: 100%;
+    max-width: 614px;
+  }
+}
+
+@media (max-width: 639px) {
+  .section {
+    padding-block: 56px;
+  }
+
+  .content {
+    gap: 24px;
+  }
+
+  .title {
+    font-size: 26px;
+    line-height: 36px;
+    white-space: normal;
+  }
+
+  .title br {
+    display: none;
+  }
+
+  .text {
+    font-size: 15px;
+    line-height: 26px;
+  }
+
+  /* The floating cells would sit on top of the copy at this width. */
+  .decor {
+    display: none;
+  }
+}

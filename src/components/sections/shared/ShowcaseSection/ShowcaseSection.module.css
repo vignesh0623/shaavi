@@ -1,0 +1,83 @@
+.section {
+  padding: 36px var(--gutter);
+}
+
+.plain {
+  background: var(--color-white);
+}
+
+.tinted {
+  background: var(--color-primary-06);
+}
+
+/* A page can set `--showcase-gap` where its frame spaces the cards differently. */
+.inner {
+  display: flex;
+  flex-direction: column;
+  gap: var(--showcase-gap, 50px);
+  max-width: var(--content-width);
+  margin: 0 auto;
+}
+
+/* Positioned, so text hidden for screen readers in a card (absolutely
+   positioned) stays inside the row when it scrolls sideways, instead of
+   widening the page. */
+.cards {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  width: 100%;
+}
+
+.equalHeights {
+  align-items: stretch;
+}
+
+/* Five to a row; a shorter row keeps the same card width. */
+.cards > li {
+  display: flex;
+  flex: 0 1 calc((100% - 4 * 24px) / 5);
+  min-width: 1px;
+}
+
+/* ---- Responsive (desktop design above is untouched) ---- */
+
+/* Below ~1340px five cards no longer fit: keep their size, swipe instead.
+   The row runs to both screen edges (auto width, so the negative margins
+   widen it rather than shift it). */
+@media (max-width: 1339px) {
+  .cards {
+    width: auto;
+    margin-inline: calc(-1 * var(--gutter));
+    padding: 0 var(--gutter) 4px;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    scroll-padding-inline: var(--gutter);
+    scrollbar-width: none;
+  }
+
+  .cards > li {
+    flex: 0 0 240px;
+    scroll-snap-align: start;
+  }
+}
+
+/* Mouse users get a slim scrollbar as a cue that the row scrolls. */
+@media (max-width: 1339px) and (pointer: fine) {
+  .cards {
+    padding-bottom: 12px;
+    scrollbar-width: thin;
+    scrollbar-color: var(--color-primary-30) transparent;
+  }
+}
+
+@media (max-width: 1023px) {
+  .section {
+    padding-block: 48px;
+  }
+
+  .inner {
+    gap: 32px;
+  }
+}

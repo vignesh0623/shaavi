@@ -1,0 +1,82 @@
+.search {
+  display: flex;
+  flex-shrink: 0;
+  align-items: center;
+  justify-content: space-between;
+  gap: 14px;
+  width: 600px;
+  height: 60px;
+  padding: 16px 14px 16px 24px;
+  border-radius: 30px;
+  background: var(--color-white);
+  transition: box-shadow 0.2s ease;
+}
+
+.search:focus-within {
+  box-shadow: 0 0 0 2px var(--color-primary-30);
+}
+
+.field {
+  display: flex;
+  flex: 1 1 auto;
+  align-items: center;
+  gap: 14px;
+  min-width: 0;
+}
+
+/*
+ * Inputs ignore `text-box`, so the trim is done by hand: the line box is
+ * exactly the font's content area and the margins cut it down to the
+ * cap-height → baseline band that the design aligns on. The 16px padding
+ * (the bar's own) makes a tap anywhere up the bar land in the field; the
+ * margins take it back out of the layout.
+ */
+.input {
+  flex: 1 1 auto;
+  min-width: 0;
+  box-sizing: content-box;
+  height: calc((var(--font-ascent) + var(--font-descent)) * 1em);
+  padding-block: 16px;
+  margin-block: calc((var(--font-cap-height) - var(--font-ascent)) * 1em - 16px)
+    calc(-1 * var(--font-descent) * 1em - 16px);
+  font-size: 15px;
+  line-height: calc((var(--font-ascent) + var(--font-descent)) * 1em);
+  color: var(--color-heading);
+  /* On a narrow bar the placeholder ends in "…" rather than mid-word. */
+  text-overflow: ellipsis;
+  appearance: none;
+  outline: none;
+}
+
+.input::placeholder {
+  color: var(--color-muted);
+  opacity: 1;
+}
+
+/* iOS zooms the page in on form text under 16px. */
+@media (pointer: coarse) {
+  .input {
+    font-size: 16px;
+  }
+}
+
+.input::-webkit-search-decoration,
+.input::-webkit-search-cancel-button {
+  appearance: none;
+}
+
+.submit {
+  display: flex;
+  flex-shrink: 0;
+  align-items: center;
+  justify-content: center;
+  width: 38px;
+  height: 38px;
+  border-radius: 100px;
+  background: var(--color-primary-15);
+  transition: background-color 0.2s ease;
+}
+
+.submit:hover {
+  background: var(--color-primary-20);
+}

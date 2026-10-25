@@ -1,0 +1,29 @@
+/* Page rhythm, from the Figma frame: the intro is spaced more loosely than
+   All Tests', and the grid and call to action sit closer to it. */
+.intro {
+  --intro-gap: 34px;
+}
+
+.catalog {
+  margin-top: 34px;
+}
+
+.cta {
+  margin-top: 36px;
+}
+
+@media (max-width: 1023px) {
+  .catalog {
+    margin-top: 48px;
+  }
+
+  .cta {
+    margin-top: 40px;
+  }
+}
+
+@media (max-width: 639px) {
+  .catalog {
+    margin-top: 40px;
+  }
+}

@@ -1,0 +1,180 @@
+/*
+ * Pages with the scroll experience (home, About). The page is its own layer (`isolation`) with the white
+ * page background, so the design's luminosity-blended renders still blend
+ * against white, and the 3D canvas (z-index -1) sits between the section
+ * glows (-2) and all content.
+ */
+.page {
+  position: relative;
+  isolation: isolate;
+  background: var(--color-white);
+}
+
+/* These sections are white on the white page; letting the page show
+   through is invisible, except that the 3D layer can now be seen. */
+.page [data-motion="hero"],
+.page [data-motion="process"],
+.page [data-motion="statement"],
+.page [data-motion="cta"],
+.page :global(#tests) {
+  background: transparent;
+}
+
+.page [data-motion="hero-glow"],
+.page [data-motion="cta-glows"] {
+  z-index: -2;
+}
+
+/* The design's light-blue tint is 6% translucent. Over the white page it
+   is exactly this tint-over-white; painting it solid keeps the 3D layer
+   from showing through behind text. */
+.page :global(#profiles),
+.page :global(#tests) [data-motion="card"],
+.page [data-motion="stats"],
+.page [data-motion="highlights"],
+.page [data-motion="director"] {
+  background: linear-gradient(var(--color-primary-06) 0 0), var(--color-white);
+}
+
+/* ---- How It Works: line linking the steps (drawn by GSAP) ---- */
+
+/* The step cards slide in from 36px to the side, which on phones is past
+   the screen edge: clip it, so the page doesn't scroll sideways. */
+.page [data-motion="process"] {
+  overflow-x: clip;
+}
+
+.page [data-motion="process-steps"] {
+  position: relative;
+}
+
+.page [data-motion="process-line"] {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+  pointer-events: none;
+  fill: none;
+  stroke: var(--color-primary);
+  stroke-opacity: 0.35;
+  stroke-width: 1.5;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+/* ---- Card hover: profiles and tests ---- */
+@media (hover: hover) and (pointer: fine) {
+  .page [data-motion="card-media"] img {
+    transition: scale 0.8s var(--ease-soft);
+  }
+
+  .page [data-motion="card"]:hover [data-motion="card-media"] img {
+    scale: 1.06;
+  }
+
+  /* "View Details" gets a light tint while its card is hovered (its own
+     hover still fills it blue). */
+  .page [data-motion="card"]:hover [data-motion="card-action"]:not(:hover) {
+    background: var(--color-primary-06);
+  }
+}
+
+/* Lift and shadow only while the rows sit side by side: below 1340px they
+   scroll sideways and would clip both. */
+@media (hover: hover) and (pointer: fine) and (min-width: 1340px) {
+  .page [data-motion="card"] {
+    transition:
+      translate 0.5s var(--ease-soft),
+      box-shadow 0.5s var(--ease-soft);
+  }
+
+  .page [data-motion="card"]:hover {
+    translate: 0 -4px;
+    box-shadow: var(--shadow-lift);
+  }
+}
+
+/* ---- Final call to action: soft pulse on the button ---- */
+.page [data-motion="cta-button"] {
+  position: relative;
+}
+
+.page [data-motion="cta-button"]::before,
+.page [data-motion="cta-button"]::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  pointer-events: none;
+  opacity: 0;
+}
+
+/* A thin ring that widens and fades… */
+.page [data-motion="cta-button"]::before {
+  border: 1px solid rgb(0 135 198 / 0.6);
+}
+
+/* …over a soft glow that breathes underneath. */
+.page [data-motion="cta-button"]::after {
+  z-index: -1;
+  box-shadow: 0 10px 26px -6px rgb(0 135 198 / 0.55);
+  transition: opacity 0.4s ease;
+}
+
+.page [data-motion="cta-button"][data-glow]::before {
+  animation: ctaPulse 3s var(--ease-soft) infinite;
+}
+
+.page [data-motion="cta-button"][data-glow]::after {
+  animation: ctaGlow 3s ease-in-out infinite;
+}
+
+.page [data-motion="cta-button"]:hover::after,
+.page [data-motion="cta-button"]:focus-visible::after {
+  opacity: 1;
+  animation: none;
+}
+
+@keyframes ctaPulse {
+  0% {
+    opacity: 0.8;
+    transform: scale(1);
+  }
+
+  70%,
+  100% {
+    opacity: 0;
+    transform: scale(1.12, 1.4);
+  }
+}
+
+@keyframes ctaGlow {
+  0%,
+  100% {
+    opacity: 0.25;
+  }
+
+  50% {
+    opacity: 0.7;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .page [data-motion="card"],
+  .page [data-motion="card-media"] img {
+    transition: box-shadow 0.3s ease;
+  }
+
+  .page [data-motion="card"]:hover,
+  .page [data-motion="card"]:hover [data-motion="card-media"] img {
+    translate: none;
+    scale: none;
+  }
+
+  .page [data-motion="cta-button"]::before,
+  .page [data-motion="cta-button"]::after {
+    animation: none;
+  }
+}

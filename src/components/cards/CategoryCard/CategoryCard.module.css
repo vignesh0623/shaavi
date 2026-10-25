@@ -1,0 +1,233 @@
+.card {
+  --caption-height: 70px;
+  /* Hover tint: a deep shade of the brand blue, dark enough for white text. */
+  --reveal-tint: 0 80 122;
+
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  width: 100%;
+  border-radius: 24px;
+}
+
+.media {
+  position: relative;
+  flex-shrink: 0;
+  width: 100%;
+  height: 249px;
+  overflow: hidden;
+  border-radius: 20px;
+}
+
+.image {
+  object-fit: cover;
+}
+
+/* Progressive blur under the caption: 0 → 12.5px over its height. */
+.frost {
+  -webkit-mask-image: linear-gradient(to bottom, transparent var(--from), #000 var(--to));
+  mask-image: linear-gradient(to bottom, transparent var(--from), #000 var(--to));
+  filter: blur(var(--blur));
+}
+
+.frost1 {
+  --blur: 3.125px;
+  --from: calc(100% - var(--caption-height));
+  --to: calc(100% - var(--caption-height) * 0.75);
+}
+
+.frost2 {
+  --blur: 6.25px;
+  --from: calc(100% - var(--caption-height) * 0.75);
+  --to: calc(100% - var(--caption-height) * 0.5);
+}
+
+.frost3 {
+  --blur: 9.375px;
+  --from: calc(100% - var(--caption-height) * 0.5);
+  --to: calc(100% - var(--caption-height) * 0.25);
+}
+
+.frost4 {
+  --blur: 12.5px;
+  --from: calc(100% - var(--caption-height) * 0.25);
+  --to: 100%;
+}
+
+/* The bottom strip of the photo. Its content sits at the foot: the name,
+   then the details, which take no room until revealed. */
+.caption {
+  position: absolute;
+  inset: auto 0 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-end;
+  height: var(--caption-height);
+  padding: 40px 14px 20px;
+  background: rgb(0 0 0 / 0.05);
+}
+
+/* Tinted blur that covers the photo while the card is open, its top edge
+   feathered so it rises without a hard line. The caption's content is
+   positioned so it paints above it, without the caption becoming a layer of
+   its own (which could limit what the blur sees). */
+.caption::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    0deg,
+    rgb(var(--reveal-tint)) 0%,
+    rgb(var(--reveal-tint) / 0.6) 50%,
+    rgb(var(--reveal-tint) / 0) 100%
+  );
+  -webkit-backdrop-filter: blur(16px);
+  backdrop-filter: blur(16px);
+  -webkit-mask-image: linear-gradient(to bottom, transparent, #000 40px);
+  mask-image: linear-gradient(to bottom, transparent, #000 40px);
+  opacity: 0;
+}
+
+.name,
+.details {
+  position: relative;
+}
+
+.name {
+  font-size: 14px;
+  font-weight: 500;
+  line-height: normal;
+  color: var(--color-white);
+  text-align: center;
+  white-space: nowrap;
+}
+
+/* Closed: no height (the grid row is 0fr), so the name stays where the
+   design puts it. */
+.details {
+  display: grid;
+  grid-template-rows: 0fr;
+  opacity: 0;
+}
+
+.detailsInner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  min-height: 0;
+  overflow: hidden;
+}
+
+/* May wrap where the row squeezes the cards (1200–1339px). */
+.summary {
+  font-size: 12px;
+  line-height: 18px;
+  color: var(--color-white);
+  text-align: center;
+  text-wrap: balance;
+}
+
+.action {
+  display: inline-flex;
+  flex-shrink: 0;
+  align-items: center;
+  gap: 6px;
+  height: 28px;
+  padding: 0 12px;
+  border-radius: var(--radius-full);
+  background: var(--color-white);
+  font-size: 12px;
+  line-height: 16px;
+  color: var(--color-heading);
+}
+
+/* ---- Hover and keyboard focus (not in the Figma file) ----
+   The photo and its frosted copies zoom together inside the frame while the
+   caption rises to cover them in a tinted blur, lifting the name to reveal
+   the summary and the pill. The card lifts only while the row sits still
+   (from 1200px): below that the row scrolls sideways and would clip the lift
+   and its shadow. */
+@media (hover: hover) and (pointer: fine) {
+  .image {
+    transition: scale 0.8s var(--ease-soft);
+  }
+
+  .caption {
+    transition: height 0.6s var(--ease-soft);
+  }
+
+  .caption::before {
+    transition: opacity 0.5s var(--ease-soft);
+  }
+
+  .details {
+    transition:
+      grid-template-rows 0.6s var(--ease-soft),
+      margin-top 0.6s var(--ease-soft),
+      opacity 0.3s ease;
+  }
+
+  .card:hover .image,
+  .card:focus-visible .image {
+    scale: 1.06;
+  }
+
+  .card:hover .caption,
+  .card:focus-visible .caption {
+    height: 100%;
+  }
+
+  .card:hover .caption::before,
+  .card:focus-visible .caption::before {
+    opacity: 1;
+  }
+
+  /* The text fades in once the caption has begun to rise, and out at once. */
+  .card:hover .details,
+  .card:focus-visible .details {
+    grid-template-rows: 1fr;
+    margin-top: 10px;
+    opacity: 1;
+    transition-delay: 0s, 0s, 0.15s;
+  }
+}
+
+@media (hover: hover) and (pointer: fine) and (min-width: 1200px) {
+  .card {
+    transition: translate 0.5s var(--ease-soft);
+  }
+
+  .media {
+    transition: box-shadow 0.5s var(--ease-soft);
+  }
+
+  .card:hover,
+  .card:focus-visible {
+    translate: 0 -4px;
+  }
+
+  .card:hover .media,
+  .card:focus-visible .media {
+    box-shadow: var(--shadow-lift);
+  }
+}
+
+/* Without motion the card still opens, at once. */
+@media (prefers-reduced-motion: reduce) {
+  .card:hover,
+  .card:focus-visible,
+  .card:hover .image,
+  .card:focus-visible .image {
+    translate: none;
+    scale: none;
+  }
+
+  .caption,
+  .caption::before,
+  .details {
+    transition: none;
+  }
+}

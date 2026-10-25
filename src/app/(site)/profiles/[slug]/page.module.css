@@ -1,0 +1,25 @@
+/* `isolation` keeps the glow at the top (z-index: -1) above the page
+   background. */
+.page {
+  isolation: isolate;
+}
+
+/* Page rhythm from the Figma frame: the gap above "Other Profiles You May
+   Need", and the 46px under its title (50px on a test's page). */
+.related {
+  --showcase-gap: 46px;
+
+  margin-top: 44px;
+}
+
+@media (max-width: 1023px) {
+  .related {
+    margin-top: 56px;
+  }
+}
+
+@media (max-width: 639px) {
+  .related {
+    margin-top: 48px;
+  }
+}

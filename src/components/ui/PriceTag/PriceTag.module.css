@@ -1,0 +1,31 @@
+.price {
+  /* Contains the visually-hidden label so it can't overflow scrollers. */
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 25px;
+  width: 100%;
+  font-size: 16px;
+  line-height: 30px;
+  white-space: nowrap;
+}
+
+.current {
+  font-weight: 700;
+  color: var(--color-heading);
+}
+
+.original {
+  font-weight: 300;
+  text-decoration-line: line-through;
+  text-decoration-thickness: from-font;
+  text-decoration-skip-ink: none;
+}
+
+.light {
+  color: var(--color-strike);
+}
+
+.placeholder {
+  color: var(--color-placeholder);
+}

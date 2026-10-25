@@ -1,0 +1,4 @@
+/* The design sets this section's description in #1e1e1e. */
+.section {
+  --section-description-color: var(--color-ink);
+}

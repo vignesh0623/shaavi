@@ -1,0 +1,114 @@
+.card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  border-radius: 24px;
+}
+
+.panel {
+  flex-shrink: 0;
+  width: 100%;
+  height: 249px;
+  margin-bottom: -28px;
+  border-radius: 20px;
+  background: var(--color-primary-15);
+}
+
+.footer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+  padding-bottom: 14px;
+}
+
+.label {
+  font-size: 14px;
+  line-height: 24px;
+  text-align: center;
+  white-space: nowrap;
+}
+
+.mosaic {
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  grid-template-rows: repeat(3, minmax(0, 1fr));
+  width: 100%;
+  height: 205.5px;
+  overflow: clip;
+  border-radius: 20px;
+}
+
+.tile {
+  position: relative;
+}
+
+.image {
+  object-fit: cover;
+}
+
+/* ---- Hover and keyboard focus (not in the Figma file) ----
+   Each photo zooms inside its own tile and the arrow nudges forward. The
+   card lifts only while the row sits still (from 1200px), as on the photo
+   cards beside it. */
+@media (hover: hover) and (pointer: fine) {
+  .tile {
+    overflow: hidden;
+  }
+
+  .image {
+    transition: scale 0.8s var(--ease-soft);
+  }
+
+  .arrow {
+    transition: translate 0.5s var(--ease-soft);
+  }
+
+  .card:hover .image,
+  .card:focus-visible .image {
+    scale: 1.06;
+  }
+
+  .card:hover .arrow,
+  .card:focus-visible .arrow {
+    translate: 4px 0;
+  }
+}
+
+@media (hover: hover) and (pointer: fine) and (min-width: 1200px) {
+  .card {
+    transition: translate 0.5s var(--ease-soft);
+  }
+
+  .panel {
+    transition: box-shadow 0.5s var(--ease-soft);
+  }
+
+  .card:hover,
+  .card:focus-visible {
+    translate: 0 -4px;
+  }
+
+  .card:hover .panel,
+  .card:focus-visible .panel {
+    box-shadow: var(--shadow-lift);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .card:hover,
+  .card:focus-visible,
+  .card:hover .image,
+  .card:focus-visible .image,
+  .card:hover .arrow,
+  .card:focus-visible .arrow {
+    translate: none;
+    scale: none;
+  }
+}

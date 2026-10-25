@@ -1,0 +1,104 @@
+/* The design's card is set to 536px, which clips its bottom padding to
+   14px; the padding reproduces that and lets the card grow with errors. */
+.card {
+  padding: 32px 32px 14px;
+  border-radius: 30px;
+  background: var(--color-white);
+  box-shadow: 0 4px 80px rgb(0 0 0 / 0.04);
+}
+
+/* Fields, then the button at the right. */
+.form {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 48px;
+}
+
+.fields {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+  align-self: stretch;
+}
+
+.names {
+  display: flex;
+  gap: 30px;
+}
+
+.names > * {
+  flex: 1 1 0;
+}
+
+.failed {
+  align-self: stretch;
+  font-size: 13px;
+  line-height: 20px;
+  color: var(--color-error);
+}
+
+.submit:disabled {
+  opacity: 0.7;
+  cursor: progress;
+}
+
+/* ---- After sending (not in the design): the card keeps its size ---- */
+.sent {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 18px;
+  min-height: 536px;
+  padding: 32px;
+  text-align: center;
+}
+
+.sentIcon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: var(--color-primary-15);
+}
+
+.sentTitle {
+  font-size: 26px;
+  font-weight: 600;
+  line-height: 34px;
+  outline: none;
+}
+
+.sentText {
+  max-width: 360px;
+  font-size: 14px;
+  line-height: 24px;
+  color: var(--color-description);
+}
+
+/* ---- Responsive (desktop design above is untouched) ---- */
+@media (max-width: 639px) {
+  .card {
+    padding: 24px 20px 20px;
+    border-radius: 24px;
+  }
+
+  .form {
+    gap: 32px;
+  }
+
+  .names {
+    flex-direction: column;
+  }
+
+  .form .submit {
+    align-self: stretch;
+  }
+
+  .sent {
+    min-height: 420px;
+  }
+}

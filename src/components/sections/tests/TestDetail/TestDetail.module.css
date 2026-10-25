@@ -1,0 +1,305 @@
+/* Clip the glow sideways only. The page sets `isolation` to keep the glow
+   (z-index: -1) above the page background. */
+.detail {
+  position: relative;
+  padding-top: 99px;
+  overflow-x: clip;
+}
+
+.glow {
+  position: absolute;
+  z-index: -1;
+  top: -503px;
+  left: calc(var(--frame-left) + 26px);
+  width: 1330px;
+  max-width: none;
+  height: 1146px;
+  pointer-events: none;
+}
+
+/* The design's 1295px column (x 63–1358) sits 9.5px left of centre. */
+.inner {
+  width: 1295px;
+  max-width: calc(100% - 2 * var(--gutter));
+  margin-inline: auto;
+  translate: -9.5px 0;
+}
+
+.back {
+  margin-left: 4px;
+}
+
+.layout {
+  display: flex;
+  align-items: flex-start;
+  gap: 29px;
+  margin-top: 20px;
+}
+
+/* Right column. It comes first in the page, so the test's name leads. */
+.main {
+  display: flex;
+  flex: 0 1 912px;
+  flex-direction: column;
+  gap: 37px;
+  min-width: 0;
+}
+
+/* Left column: photo, then the lists 8px in from its edge. */
+.side {
+  display: flex;
+  flex: 0 0 354px;
+  flex-direction: column;
+  gap: 30.7px;
+  order: -1;
+}
+
+/* ---- Name, price, button and description (and a profile's tests) ---- */
+.lead {
+  display: flex;
+  flex-direction: column;
+  gap: 23px;
+}
+
+.intro {
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+}
+
+.header {
+  display: flex;
+  align-items: flex-start;
+  gap: 20px;
+}
+
+.heading {
+  display: flex;
+  flex: 1 0 0;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 24px;
+  min-width: 1px;
+}
+
+.title {
+  font-size: 30px;
+  font-weight: 600;
+  line-height: 63px;
+}
+
+.price {
+  font-size: 24px;
+  font-weight: 500;
+  line-height: normal;
+  white-space: nowrap;
+}
+
+.originalPrice {
+  margin-left: 18px;
+  font-weight: 300;
+  color: var(--color-placeholder);
+  text-decoration-thickness: from-font;
+}
+
+.description {
+  font-size: 14px;
+  line-height: 1.8;
+  /* The design sets this text in #2d2d2d. */
+  color: #2d2d2d;
+}
+
+/* ---- Key details, two to a row ---- */
+.facts {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 18px;
+}
+
+/* ---- Sample journey beside a photo as tall as it ---- */
+.journey {
+  display: flex;
+  gap: 24px;
+}
+
+.journeyCard {
+  flex-shrink: 0;
+  width: 317px;
+}
+
+.journey .journeyPhoto {
+  flex: 1 0 0;
+  min-width: 1px;
+  height: 207px;
+  border-radius: 30px;
+}
+
+/* ---- Photo and lists ---- */
+.media {
+  padding: 14.606px;
+  overflow: clip;
+  border-radius: 24.343px;
+  background: var(--color-primary-05);
+}
+
+.mediaFrame {
+  position: relative;
+  height: 219.089px;
+  overflow: hidden;
+  border-radius: 16.229px;
+}
+
+.image {
+  object-fit: cover;
+}
+
+.lists {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  padding-left: 8px;
+}
+
+/* ---- A profile's page: its frame ("Profile Detail Page 9") is spaced a
+   little differently from the test frame's ---- */
+.profile .heading {
+  gap: 20px;
+}
+
+.profile .intro {
+  gap: 30px;
+}
+
+.profile .price {
+  font-weight: 600;
+}
+
+.profile .description {
+  line-height: 24px;
+}
+
+/* The photo's card is set to 247px there, and the lists still start at y 430. */
+.profile .side {
+  gap: 32px;
+}
+
+.profile .media {
+  height: 247px;
+}
+
+.profile .mediaFrame {
+  height: 217px;
+  border-radius: 20px;
+}
+
+/* ---- Responsive (desktop design above is untouched) ---- */
+@media (max-width: 1339px) {
+  .inner {
+    translate: none;
+  }
+
+  .back {
+    margin-left: 0;
+  }
+}
+
+@media (max-width: 1199px) {
+  /* Names may wrap here; keep their lines close. */
+  .title {
+    line-height: 40px;
+  }
+
+  .journey {
+    flex-direction: column;
+  }
+
+  .journeyCard {
+    width: auto;
+  }
+
+  .journey .journeyPhoto {
+    flex: none;
+  }
+}
+
+/* One column: photo, name and details, lists, then the journey. */
+@media (max-width: 1023px) {
+  .layout {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 40px;
+  }
+
+  .main,
+  .side {
+    display: contents;
+  }
+
+  .media {
+    order: 1;
+  }
+
+  .lead {
+    order: 2;
+  }
+
+  .facts {
+    order: 3;
+  }
+
+  .lists {
+    order: 4;
+    padding-left: 0;
+  }
+
+  .journey {
+    order: 5;
+  }
+
+  .mediaFrame {
+    height: auto;
+    aspect-ratio: 324.788 / 219.089;
+  }
+
+  .profile .media {
+    height: auto;
+  }
+
+  .profile .mediaFrame {
+    height: auto;
+    aspect-ratio: 324.788 / 217;
+  }
+}
+
+@media (max-width: 639px) {
+  .detail {
+    padding-top: 96px;
+  }
+
+  .layout {
+    gap: 32px;
+  }
+
+  .header {
+    flex-direction: column;
+    gap: 24px;
+  }
+
+  .title {
+    font-size: 24px;
+    line-height: 32px;
+  }
+
+  .price {
+    font-size: 20px;
+  }
+
+  .facts {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 12px;
+  }
+
+  .journey .journeyPhoto {
+    height: 180px;
+  }
+}

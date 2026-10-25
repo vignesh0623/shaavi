@@ -1,0 +1,166 @@
+/*
+ * Decorations are positioned in the 1440px Figma frame's coordinates,
+ * measured from --frame-left (the frame's left edge, kept centred).
+ */
+.hero {
+  position: relative;
+  height: 564px;
+  padding: 125px var(--gutter) 0;
+  overflow: hidden;
+  background: var(--color-white);
+}
+
+.glow,
+.doctor,
+.scientist {
+  position: absolute;
+  max-width: none;
+  pointer-events: none;
+}
+
+.glow {
+  top: -492px;
+  left: calc(var(--frame-left) - 694px);
+  width: 2696px;
+  height: 1886px;
+}
+
+.doctor {
+  top: 222px;
+  left: calc(var(--frame-left) + 1010px);
+  width: 348px;
+  height: 378px;
+}
+
+.scientist {
+  top: 233px;
+  left: calc(var(--frame-left) + 31px);
+  width: 491px;
+  height: 331px;
+}
+
+.content {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 34px;
+  width: 681px;
+  margin: 0 auto;
+  translate: -0.5px 0;
+}
+
+.title {
+  font-size: 42px;
+  font-weight: 500;
+  line-height: 50px;
+  white-space: nowrap;
+}
+
+/* Wider than its column in the design; overflows evenly on both sides. */
+.subtitle {
+  flex-shrink: 0;
+  width: 718px;
+  font-size: 16px;
+  line-height: 28px;
+  text-align: center;
+}
+
+.intro {
+  position: relative;
+  width: 554px;
+  margin: 91px auto 0;
+  translate: 8px 0;
+  font-size: 16px;
+  line-height: 28px;
+  text-align: center;
+}
+
+.intro strong {
+  font-weight: 600;
+}
+
+.decor {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+.decor > img {
+  position: absolute;
+  max-width: none;
+  mix-blend-mode: luminosity;
+}
+
+.cellSphere {
+  top: 100px;
+  left: calc(var(--frame-left) + 254px);
+  width: 108px;
+  height: 108px;
+}
+
+.cellDivision {
+  top: 133.804px;
+  left: calc(var(--frame-left) + 1302.814px);
+  width: 119.85px;
+  height: 119.85px;
+  rotate: 44.23deg;
+  scale: 1 -1;
+}
+
+/* ---- Responsive (desktop design above is untouched) ---- */
+
+/* The portraits would cover the copy once the frame no longer fits. */
+@media (max-width: 1199px) {
+  .hero {
+    height: auto;
+    padding-bottom: 72px;
+  }
+
+  .doctor,
+  .scientist {
+    display: none;
+  }
+
+  .intro {
+    translate: none;
+  }
+}
+
+@media (max-width: 767px) {
+  .hero {
+    padding-top: 140px;
+  }
+
+  .content,
+  .subtitle,
+  .intro {
+    width: 100%;
+  }
+
+  .content {
+    gap: 24px;
+    translate: none;
+  }
+
+  .title {
+    font-size: 30px;
+    line-height: 38px;
+    white-space: normal;
+    text-align: center;
+  }
+
+  .subtitle,
+  .intro {
+    font-size: 15px;
+    line-height: 26px;
+  }
+
+  .intro {
+    margin-top: 32px;
+  }
+
+  .decor {
+    display: none;
+  }
+}

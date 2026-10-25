@@ -1,0 +1,164 @@
+.section {
+  padding: 60px 80px 0;
+}
+
+.row {
+  display: flex;
+  align-items: flex-start;
+  gap: 48px;
+  max-width: calc(var(--page-width) - 160px);
+  margin: 0 auto;
+}
+
+.media {
+  position: relative;
+  flex: 1 0 0;
+  min-width: 1px;
+  height: 283px;
+  overflow: hidden;
+  border-radius: 30px;
+}
+
+/* Stronger 50% brand-blue wash than the other photos. */
+.media::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgb(0 135 198 / 0.5);
+}
+
+.image {
+  object-fit: cover;
+}
+
+.quote {
+  position: absolute;
+  z-index: 1;
+  top: 110px;
+  left: 37px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 26px;
+  width: 513px;
+  color: var(--color-white);
+}
+
+.dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: var(--color-white);
+}
+
+.quoteText {
+  width: 100%;
+  font-size: 18px;
+  font-weight: 500;
+  line-height: 29px;
+}
+
+.content {
+  display: flex;
+  flex: 1 0 0;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-end;
+  gap: 40px;
+  min-width: 1px;
+}
+
+.heading {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 24px;
+}
+
+.title {
+  font-size: 26px;
+  font-weight: 600;
+  line-height: normal;
+  white-space: nowrap;
+}
+
+/* The design sets these two paragraphs at slightly different widths. */
+.intro {
+  width: 558px;
+  max-width: 100%;
+  font-size: 16px;
+  line-height: 24px;
+}
+
+.body {
+  width: 578px;
+  max-width: 100%;
+  font-size: 16px;
+  line-height: 26px;
+}
+
+/* ---- Responsive (desktop design above is untouched) ---- */
+
+/* Once the photo narrows, the quote joins the flow so the photo grows with it. */
+@media (max-width: 1339px) {
+  .media {
+    height: auto;
+    min-height: 283px;
+    padding: 110px 37px 36px;
+  }
+
+  .quote {
+    position: relative;
+    inset: auto;
+    width: auto;
+  }
+}
+
+@media (max-width: 1279px) {
+  .section {
+    padding-inline: var(--gutter);
+  }
+}
+
+@media (max-width: 1023px) {
+  .row {
+    flex-direction: column;
+    gap: 40px;
+  }
+
+  .media,
+  .content {
+    flex: none;
+    width: 100%;
+  }
+}
+
+@media (max-width: 639px) {
+  .section {
+    padding-top: 0;
+  }
+
+  .media {
+    min-height: 0;
+    padding: 96px 24px 28px;
+    border-radius: 24px;
+  }
+
+  .quote {
+    gap: 18px;
+  }
+
+  .quoteText {
+    font-size: 16px;
+    line-height: 26px;
+  }
+
+  .content {
+    gap: 28px;
+  }
+
+  .intro,
+  .body {
+    font-size: 15px;
+  }
+}

@@ -1,0 +1,112 @@
+/* Same box as a CatalogCard (378px at the design size, 414px with the pill):
+   each bar is as tall as the trimmed text it stands for. */
+.card {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+  height: 100%;
+  padding: 18px;
+  border-radius: 30px;
+  /* Tint painted over white, so the 3D layer doesn't show through. */
+  background: linear-gradient(var(--color-primary-05) 0 0), var(--color-white);
+}
+
+/* A soft highlight sweeps across every bar. */
+.block {
+  display: block;
+  flex-shrink: 0;
+  border-radius: 6px;
+  background-color: var(--color-primary-10);
+  background-image: linear-gradient(
+    100deg,
+    transparent 30%,
+    rgb(255 255 255 / 0.7) 50%,
+    transparent 70%
+  );
+  background-size: 250% 100%;
+  animation: shimmer 1.4s ease-in-out infinite;
+}
+
+.media {
+  height: 140px;
+  border-radius: 20px;
+}
+
+.body,
+.heading,
+.lines {
+  display: flex;
+  flex-direction: column;
+}
+
+.body {
+  gap: 18px;
+}
+
+.heading {
+  gap: 12px;
+}
+
+.lines {
+  gap: 9px;
+}
+
+.name {
+  width: 62%;
+  height: 11px;
+}
+
+.line {
+  height: 8px;
+}
+
+.short {
+  width: 72%;
+}
+
+.pill {
+  width: 46%;
+  height: 24px;
+  border-radius: 20px;
+}
+
+.delivery {
+  width: 56%;
+  height: 9px;
+}
+
+.price {
+  width: 32%;
+  height: 11px;
+}
+
+.action {
+  height: 38px;
+  margin-top: auto;
+  border-radius: var(--radius-full);
+  background-color: var(--color-white);
+}
+
+@keyframes shimmer {
+  from {
+    background-position: 100% 0;
+  }
+
+  to {
+    background-position: -150% 0;
+  }
+}
+
+/* Below 1024px the description is 12px (CatalogCard): its two lines trim to
+   26.4px. */
+@media (max-width: 1023px) {
+  .lines {
+    gap: 10.4px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .block {
+    animation: none;
+  }
+}

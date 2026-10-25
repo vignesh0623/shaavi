@@ -1,0 +1,106 @@
+.step {
+  display: flex;
+  align-items: center;
+  gap: 25px;
+  width: 100%;
+}
+
+.reverse {
+  flex-direction: row-reverse;
+}
+
+.number {
+  flex-shrink: 0;
+  font-size: 72px;
+  line-height: normal;
+  color: var(--color-step-number);
+  text-align: center;
+  white-space: nowrap;
+}
+
+.card {
+  display: flex;
+  flex: 1 0 0;
+  align-items: center;
+  gap: 19px;
+  min-width: 1px;
+  /* 1px border + 19px padding = the design's 20px inset (Figma strokes
+     don't take layout space). */
+  padding: 19px;
+  border: 1px solid #f4f4f4;
+  border-radius: 16px;
+  background: var(--color-white);
+  filter: drop-shadow(0 4px 30px rgb(0 135 198 / 0.2));
+}
+
+.iconCircle {
+  display: flex;
+  flex-shrink: 0;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  border-radius: 100px;
+  background: var(--color-primary);
+}
+
+.text {
+  display: flex;
+  flex: 1 0 0;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  gap: 12px;
+  min-width: 1px;
+}
+
+.title {
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 24px;
+}
+
+/* pre-wrap keeps the design's spacing but can still wrap on small screens. */
+.description {
+  font-size: 13px;
+  line-height: 21.6px;
+  color: var(--color-body);
+  white-space: pre-wrap;
+}
+
+@media (max-width: 639px) {
+  .step {
+    gap: 14px;
+  }
+
+  .number {
+    font-size: 44px;
+  }
+
+  .card {
+    gap: 14px;
+    padding: 15px;
+  }
+}
+
+/* The smallest phones (320px): a smaller number and icon leave the text
+   room for two-line titles. */
+@media (max-width: 359px) {
+  .step {
+    gap: 10px;
+  }
+
+  .number {
+    font-size: 36px;
+  }
+
+  .card {
+    gap: 10px;
+    padding: 11px;
+  }
+
+  .iconCircle {
+    width: 36px;
+    height: 36px;
+  }
+}

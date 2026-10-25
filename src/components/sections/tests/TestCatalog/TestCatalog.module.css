@@ -1,0 +1,144 @@
+/* The design's 1300px column (x 71–1371) is 4px wider than the content
+   area and sits 1px right of centre. */
+.catalog {
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+  width: 1300px;
+  max-width: calc(100% - 2 * var(--gutter) + 4px);
+  margin-inline: auto;
+  translate: 1px 0;
+}
+
+/* Chips on the left; the count and "Filter By" on the right. */
+.toolbar {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 62px;
+  width: 1296px;
+  max-width: 100%;
+}
+
+.chips {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.summary,
+.menus {
+  display: flex;
+  flex-shrink: 0;
+  align-items: center;
+  gap: 8px;
+}
+
+.count {
+  font-size: 13px;
+  line-height: 34.176px;
+  color: var(--color-placeholder);
+  white-space: nowrap;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 20px 24px;
+}
+
+/* Cards that arrive after a search or a filter rise into place. */
+.entering {
+  animation: enter 0.6s var(--ease-soft) both;
+}
+
+@keyframes enter {
+  from {
+    opacity: 0;
+    translate: 0 16px;
+  }
+}
+
+@keyframes fade {
+  from {
+    opacity: 0;
+  }
+}
+
+/* Watched to load more cards before the visitor reaches the end. */
+.sentinel {
+  height: 1px;
+}
+
+/* Shown when no test matches the filters. */
+.empty {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 24px;
+  padding: 60px 0;
+  text-align: center;
+}
+
+.emptyText {
+  font-size: 16px;
+  line-height: 28px;
+  color: var(--color-description);
+}
+
+/* ---- Responsive (desktop design above is untouched) ---- */
+@media (max-width: 1339px) {
+  .catalog {
+    max-width: calc(100% - 2 * var(--gutter));
+    translate: none;
+  }
+}
+
+/* The chips scroll sideways above the count and "Filter By". */
+@media (max-width: 1199px) {
+  .toolbar {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 20px;
+  }
+
+  .chips {
+    margin-inline: calc(-1 * var(--gutter));
+    padding-inline: var(--gutter);
+    overflow-x: auto;
+    scrollbar-width: none;
+  }
+
+  .summary {
+    flex-wrap: wrap;
+    justify-content: space-between;
+    row-gap: 12px;
+  }
+
+  .grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 1023px) {
+  .grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 639px) {
+  .catalog {
+    gap: 32px;
+  }
+
+  .grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+/* Without motion, they only fade in. */
+@media (prefers-reduced-motion: reduce) {
+  .entering {
+    animation-name: fade;
+  }
+}

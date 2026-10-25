@@ -1,0 +1,43 @@
+/* `isolation` keeps the intro's glow (z-index: -1) above the page
+   background while it shows through behind the question cards. */
+.page {
+  isolation: isolate;
+  padding-bottom: 149px;
+}
+
+/* Page rhythm: the gaps between sections, taken from the Figma frame. */
+.list {
+  margin-top: 70px;
+}
+
+.notice {
+  margin-top: 45px;
+}
+
+@media (max-width: 1023px) {
+  .page {
+    padding-bottom: 96px;
+  }
+
+  .list {
+    margin-top: 56px;
+  }
+
+  .notice {
+    margin-top: 56px;
+  }
+}
+
+@media (max-width: 639px) {
+  .page {
+    padding-bottom: 72px;
+  }
+
+  .list {
+    margin-top: 40px;
+  }
+
+  .notice {
+    margin-top: 48px;
+  }
+}

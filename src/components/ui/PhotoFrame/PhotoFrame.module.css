@@ -1,0 +1,16 @@
+.frame {
+  position: relative;
+  flex-shrink: 0;
+  overflow: hidden;
+}
+
+.frame::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: var(--color-primary-30);
+}
+
+.image {
+  object-fit: cover;
+}

@@ -1,0 +1,79 @@
+/* Clip the glow sideways only, so it still reaches down behind the tests. */
+.intro {
+  position: relative;
+  padding: 128px var(--gutter) 0;
+  overflow-x: clip;
+}
+
+/* Soft blue glow at the top of the page; the page sets `isolation` to keep
+   it above the page background (and, with the 3D layer, below that). */
+.glow {
+  position: absolute;
+  z-index: -1;
+  top: -503px;
+  left: calc(var(--frame-left) + 26px);
+  width: 1330px;
+  max-width: none;
+  height: 1330px;
+  pointer-events: none;
+}
+
+/* 76px from the frame's edge, as in the design; never closer than the gutter. */
+.back {
+  position: absolute;
+  top: 118px;
+  left: max(calc(var(--gutter) + 4px), calc(var(--frame-left) + 76px));
+}
+
+/* Profiles' frame sets the tag, title and search 34px apart (`--intro-gap`). */
+.content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--intro-gap, 24px);
+  width: 822px;
+  max-width: 100%;
+  margin: 0 auto;
+  padding: 0 60px;
+}
+
+.title {
+  font-size: 42px;
+  font-weight: 500;
+  line-height: 50px;
+  text-align: center;
+  white-space: nowrap;
+}
+
+/* ---- Responsive (desktop design above is untouched) ---- */
+@media (max-width: 767px) {
+  .content {
+    padding: 0;
+  }
+
+  .content .search {
+    width: 100%;
+  }
+}
+
+@media (max-width: 639px) {
+  .intro {
+    padding-top: 120px;
+  }
+
+  /* Above the tag, which is centred and may be as wide as the screen. */
+  .back {
+    top: 96px;
+  }
+
+  .title {
+    font-size: 30px;
+    line-height: 38px;
+    white-space: normal;
+  }
+
+  .content .search {
+    height: 54px;
+    padding-left: 18px;
+  }
+}

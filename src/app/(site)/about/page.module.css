@@ -1,0 +1,59 @@
+/* Page rhythm: the gaps between sections, taken from the Figma frame. */
+.statement {
+  margin-top: 76px;
+}
+
+.firstDirector {
+  margin-top: 12px;
+}
+
+.secondDirector {
+  margin-top: 47px;
+}
+
+.laboratory {
+  margin-top: 30px;
+}
+
+.commitment {
+  margin-top: 48px;
+}
+
+.cta {
+  margin-top: 54.5px;
+}
+
+/* Smaller screens use one even rhythm instead of the design's exact gaps. */
+@media (max-width: 1199px) {
+  .statement {
+    margin-top: 56px;
+  }
+
+  .firstDirector,
+  .secondDirector,
+  .laboratory,
+  .commitment {
+    margin-top: 72px;
+  }
+
+  .cta {
+    margin-top: 56px;
+  }
+}
+
+@media (max-width: 639px) {
+  .statement {
+    margin-top: 48px;
+  }
+
+  .firstDirector,
+  .secondDirector,
+  .laboratory,
+  .commitment {
+    margin-top: 64px;
+  }
+
+  .cta {
+    margin-top: 48px;
+  }
+}

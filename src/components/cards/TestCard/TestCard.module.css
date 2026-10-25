@@ -1,0 +1,97 @@
+.card {
+  display: flex;
+  flex: 1 0 0;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 30px;
+  min-width: 1px;
+  padding: 24px;
+  overflow: clip;
+  border-radius: 30px;
+  background: var(--color-primary-06);
+}
+
+.top {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  width: 100%;
+}
+
+/* A link to the test's page, as is the name (unless the whole card is). */
+.media {
+  position: relative;
+  display: block;
+  flex-shrink: 0;
+  width: 86px;
+  height: 82px;
+  overflow: hidden;
+  border-radius: 20px;
+}
+
+.image {
+  object-fit: cover;
+}
+
+.open {
+  display: flex;
+  flex-shrink: 0;
+  border-radius: 50%;
+  transition: transform 0.2s ease;
+}
+
+.open:hover {
+  transform: scale(1.08);
+}
+
+.body {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 18px;
+  width: 100%;
+}
+
+.name {
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 24px;
+  white-space: pre-line;
+}
+
+.nameLink {
+  transition: color 0.2s ease;
+}
+
+.nameLink:hover {
+  color: var(--color-primary);
+}
+
+/* ---- The whole card as one link (`linked`) ---- */
+
+/* The name's link reaches over the whole card (above its photo and text), so
+   a click anywhere on it opens the page and hovering it lights the name. */
+.linked {
+  position: relative;
+}
+
+.stretched::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+}
+
+/* Focused from the keyboard, the ring goes round the card. */
+.stretched:focus-visible {
+  outline: none;
+}
+
+.linked:has(.stretched:focus-visible) {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 3px;
+}
+
+.linked:hover .open {
+  transform: scale(1.08);
+}

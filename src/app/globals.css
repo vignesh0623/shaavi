@@ -1,0 +1,371 @@
+/* ------------------------------------------------------------------
+   Design tokens — names mirror the Figma variables
+   (Blues/Primary, Blues/Primary-light, Greys/Heading, Greys/White,
+   Greys/Placeholder, Greys/Description, Greys/Inactive-Text, Greys/Stroke,
+   Corner/Full).
+------------------------------------------------------------------- */
+:root {
+  --color-primary: #0087c6;
+  --color-primary-light: #b6ddef;
+  --color-heading: #1b1b1b;
+  --color-stroke: #d9d9d9;
+  --color-white: #ffffff;
+  --color-placeholder: #777777;
+  --color-description: #444444;
+  --color-inactive: #999999;
+  /* Underline of form fields ("greys/stroke" in the Website file). */
+  --color-field-line: #d0d0d0;
+  /* Form errors (not in the design): 5.6:1 on white. */
+  --color-error: #c62828;
+  --radius-full: 1000px;
+
+  --color-primary-05: rgb(0 135 198 / 0.05);
+  --color-primary-06: rgb(0 135 198 / 0.06);
+  --color-primary-10: rgb(0 135 198 / 0.1);
+  --color-primary-15: rgb(0 135 198 / 0.15);
+  --color-primary-20: rgb(0 135 198 / 0.2);
+  --color-primary-30: rgb(0 135 198 / 0.3);
+  --color-body: #434040;
+  --color-ink: #1e1e1e;
+  --color-muted: #666666;
+  --color-strike: #929292;
+  --color-divider: #cccccc;
+  --color-step-number: #d5d5d5;
+
+  --font-sans: var(--font-poppins), system-ui, sans-serif;
+  --font-footer: var(--font-montserrat), system-ui, sans-serif;
+  --font-brand: var(--font-inter), system-ui, sans-serif;
+
+  /* Vertical metrics of the current font (em), used where text has to be
+     trimmed by hand. Defaults are Poppins; Montserrat/Inter text overrides. */
+  --font-ascent: 1.05;
+  --font-descent: 0.35;
+  --font-cap-height: 0.698;
+
+  /* The Figma frame is 1440px wide with 72px side gutters. */
+  --page-width: 1440px;
+  --content-width: 1296px;
+  --gutter: 72px;
+  /* Left edge of the centred 1440px frame — anchors decorations. */
+  --frame-left: calc(50% - var(--page-width) / 2);
+
+  /* Hover states (not in the Figma file): a soft ease-out and the shadow
+     under a lifted card. */
+  --ease-soft: cubic-bezier(0.22, 1, 0.36, 1);
+  --shadow-lift: 0 18px 40px -18px rgb(0 135 198 / 0.35);
+}
+
+/*
+ * Responsive breakpoints (the Figma frame is desktop-only; 1440px is the
+ * reference and is never affected by these):
+ *   ≤1339px  test/profile card rows become swipeable
+ *   ≤1199px  hero category row becomes swipeable, About stacks,
+ *            section headers wrap
+ *   ≤1023px  tablet — sections stack, nav collapses into a menu
+ *   ≤767px   About intro stacks
+ *   ≤639px   mobile
+ */
+@media (max-width: 1023px) {
+  :root {
+    --gutter: 32px;
+  }
+}
+
+@media (max-width: 639px) {
+  :root {
+    --gutter: 20px;
+  }
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+}
+
+/* A column, so on a page shorter than the screen the footer can sit at
+   the bottom (Footer: `margin-top: auto`). */
+body {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  overflow-x: clip;
+  background: var(--color-white);
+  color: var(--color-heading);
+  font-family: var(--font-sans);
+  font-weight: 400;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+img,
+svg {
+  display: block;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+button,
+input {
+  font: inherit;
+  color: inherit;
+  background: none;
+  border: 0;
+}
+
+button {
+  cursor: pointer;
+}
+
+ul,
+ol {
+  list-style: none;
+}
+
+:focus-visible {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 3px;
+}
+
+/* ------------------------------------------------------------------
+   Figma "vertical trim": every text box hugs cap height → baseline,
+   so spacing between text and other elements matches the design.
+   Text elements never take margins; spacing comes from gap/padding.
+------------------------------------------------------------------- */
+:where(h1, h2, h3, h4, h5, h6, p, .text-trim) {
+  text-box: trim-both cap alphabetic;
+}
+
+/* Browsers without `text-box` get the same trim from the font metrics. */
+@supports not (text-box: trim-both cap alphabetic) {
+  :where(h1, h2, h3, h4, h5, h6, p, .text-trim) {
+    --half-leading: calc((1lh - (var(--font-ascent) + var(--font-descent)) * 1em) / 2);
+    margin-block: calc(-1 * var(--half-leading) - (var(--font-ascent) - var(--font-cap-height)) * 1em)
+      calc(-1 * var(--half-leading) - var(--font-descent) * 1em);
+  }
+}
+
+/* Figma lays text out on whole pixels: text heights round to the nearest
+   pixel and content-sized (single-line) text widths round up. */
+@supports (height: calc-size(auto, size)) {
+  :where(h1, h2, h3, h4, h5, h6, p, .text-trim) {
+    height: calc-size(auto, round(size, 1px));
+    /* Let column flex items round down below their content height. */
+    min-height: 0;
+  }
+
+  :where(.text-trim) {
+    width: calc-size(max-content, round(up, size, 1px));
+  }
+}
+
+/* Blocks sliding in from the side (reveals) never make the page wider
+   than the screen. */
+main {
+  overflow-x: clip;
+}
+
+/* Focused by RouteFocus after a navigation; not a control, so no ring. */
+main[tabindex="-1"]:focus {
+  outline: none;
+}
+
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+/*
+ * Touch screens: a link that is only a line of trimmed text (nav, footer)
+ * gets a hit area reaching into the space around it, without moving
+ * anything. `--tap-y` / `--tap-x` set the reach; where targets are close,
+ * half the gap between them.
+ */
+@media (pointer: coarse) {
+  .tap-area {
+    position: relative;
+  }
+
+  .tap-area::after {
+    content: "";
+    position: absolute;
+    inset: calc(-1 * var(--tap-y, 12px)) calc(-1 * var(--tap-x, 8px));
+  }
+}
+
+/*
+ * Page transitions (PageTransition: React's <ViewTransition> around each
+ * page), as on daivtech.com: the old page goes at once, and the new one
+ * fades in as it rises 30px (0.4s, ease-out). The header is a layer of its
+ * own that doesn't animate.
+ */
+::view-transition-old(root) {
+  display: none;
+}
+
+::view-transition-new(root) {
+  animation: none;
+}
+
+::view-transition-new(.page-enter) {
+  animation: 400ms cubic-bezier(0.25, 0.46, 0.45, 0.94) both page-arrive;
+}
+
+@keyframes page-arrive {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+}
+
+::view-transition-group(site-header) {
+  z-index: 100;
+  animation: none;
+}
+
+::view-transition-old(site-header) {
+  display: none;
+}
+
+::view-transition-new(site-header) {
+  animation: none;
+}
+
+/* Clicks during the animation reach the new page. */
+::view-transition {
+  pointer-events: none;
+}
+
+/* With reduced motion, the new page just fades in. */
+@media (prefers-reduced-motion: reduce) {
+  ::view-transition-new(.page-enter) {
+    animation: 200ms ease both page-fade-in;
+  }
+}
+
+@keyframes page-fade-in {
+  from {
+    opacity: 0;
+  }
+}
+
+/*
+ * Reveals (RevealObserver, lib/reveal.ts): with scripts running, blocks
+ * marked `data-reveal` start hidden, then arrive from that side as they come
+ * into view, one after another (`--reveal-delay`). Printing shows everything.
+ */
+@media screen and (scripting: enabled) {
+  [data-reveal]:not([data-revealed]) {
+    opacity: 0;
+  }
+
+  /* Scripts that fail to load or run late: the page appears anyway. */
+  html:not([data-reveal-ready]) [data-reveal]:not([data-revealed]) {
+    animation: reveal-fallback 0.4s ease 3s forwards;
+  }
+
+  [data-reveal][data-revealed] {
+    animation-duration: 0.8s;
+    animation-timing-function: var(--ease-soft);
+    animation-delay: var(--reveal-delay, 0ms);
+    animation-fill-mode: backwards;
+  }
+
+  [data-reveal="top"][data-revealed] {
+    animation-name: reveal-from-top;
+  }
+
+  [data-reveal="bottom"][data-revealed] {
+    animation-name: reveal-from-bottom;
+  }
+
+  [data-reveal="left"][data-revealed] {
+    animation-name: reveal-from-left;
+  }
+
+  [data-reveal="right"][data-revealed] {
+    animation-name: reveal-from-right;
+  }
+
+  [data-reveal="zoom"][data-revealed] {
+    animation-name: reveal-zoom;
+  }
+
+  [data-reveal="fade"][data-revealed] {
+    animation-name: reveal-fade;
+  }
+
+  /* Already scrolled past, or on show before the scripts started. */
+  [data-reveal][data-revealed="instant"] {
+    animation: none;
+  }
+}
+
+/* With reduced motion, blocks only fade in. */
+@media screen and (scripting: enabled) and (prefers-reduced-motion: reduce) {
+  [data-reveal][data-revealed]:not([data-revealed="instant"]) {
+    animation-name: reveal-fade;
+    animation-duration: 0.4s;
+  }
+}
+
+@keyframes reveal-from-top {
+  from {
+    opacity: 0;
+    translate: 0 -40px;
+  }
+}
+
+@keyframes reveal-from-bottom {
+  from {
+    opacity: 0;
+    translate: 0 40px;
+  }
+}
+
+@keyframes reveal-from-left {
+  from {
+    opacity: 0;
+    translate: -56px 0;
+  }
+}
+
+@keyframes reveal-from-right {
+  from {
+    opacity: 0;
+    translate: 56px 0;
+  }
+}
+
+@keyframes reveal-zoom {
+  from {
+    opacity: 0;
+    translate: 0 24px;
+    scale: 0.94;
+  }
+}
+
+@keyframes reveal-fade {
+  from {
+    opacity: 0;
+  }
+}
+
+@keyframes reveal-fallback {
+  to {
+    opacity: 1;
+  }
+}

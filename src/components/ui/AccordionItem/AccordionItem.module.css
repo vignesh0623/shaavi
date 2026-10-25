@@ -1,0 +1,108 @@
+.item {
+  padding: 24px;
+  overflow: clip;
+  border-radius: 30px;
+  background: #f0f8fc;
+  /* Lets the open/close transition animate to `height: auto`. */
+  interpolate-size: allow-keywords;
+}
+
+.item:has(.summary:focus-visible) {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 2px;
+}
+
+/* The 16px arrow sits in the 64px right gutter (48px gap + icon) and is
+   taken out of flow so the row stays as tall as the title, as in Figma. */
+.summary {
+  position: relative;
+  display: block;
+  padding-right: 64px;
+  list-style: none;
+  cursor: pointer;
+}
+
+.summary::-webkit-details-marker {
+  display: none;
+}
+
+/* The question is a single trimmed line, 10px tall: clicks on the card's
+   padding around it count too (below it, only as far as the answer). */
+.summary::after {
+  content: "";
+  position: absolute;
+  inset: -24px;
+}
+
+.summary:focus-visible {
+  outline: none;
+}
+
+.arrow {
+  position: absolute;
+  top: 0;
+  right: 0;
+  transition: scale 0.25s ease;
+}
+
+/* Points up while open, down while closed. */
+.item[open] .arrow {
+  scale: 1 -1;
+}
+
+/* The open panel clips its overflow (for the height transition), and trimmed
+   text overhangs its box: the first line's ascenders rise above it and the
+   last line's descenders drop below. The gap is padding rather than margin
+   so it stays inside the clip, and the bottom padding is cancelled by an
+   equal negative margin so it only makes room for the descenders. */
+.content {
+  padding-top: 24px;
+  padding-right: 64px;
+  padding-bottom: 8px;
+  margin-bottom: -8px;
+}
+
+@supports selector(::details-content) {
+  .item::details-content {
+    block-size: 0;
+    overflow-y: clip;
+    transition:
+      block-size 0.3s ease,
+      content-visibility 0.3s ease allow-discrete;
+  }
+
+  .item[open]::details-content {
+    block-size: auto;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .arrow,
+  .item::details-content {
+    transition: none;
+  }
+}
+
+@media (max-width: 639px) {
+  .item {
+    padding: 20px;
+    border-radius: 22px;
+  }
+
+  .summary {
+    padding-right: 32px;
+  }
+
+  .summary::after {
+    inset: -20px;
+  }
+
+  .item[open] .summary::after {
+    bottom: -16px;
+  }
+
+  .content {
+    padding-top: 16px;
+    padding-right: 0;
+  }
+}

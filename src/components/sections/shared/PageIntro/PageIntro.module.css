@@ -1,0 +1,99 @@
+/* Clip the glow sideways only, so it still reaches down behind the content
+   below the intro. */
+.intro {
+  position: relative;
+  padding: 129px var(--gutter) 0;
+  overflow-x: clip;
+}
+
+/* Soft blue glow at the top of the page; it sits behind everything below
+   it too, so pages set `isolation` to keep it above the background. */
+.glow {
+  position: absolute;
+  z-index: -1;
+  top: -499px;
+  left: calc(var(--frame-left) + 14px);
+  width: 1382px;
+  max-width: none;
+  height: 1162px;
+  pointer-events: none;
+}
+
+/* As wide as the title or the description, whichever is wider, and
+   centred half a pixel right, as in the design. */
+.content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 34px;
+  width: fit-content;
+  max-width: 100%;
+  margin: 0 auto;
+  translate: 0.5px 0;
+}
+
+.title {
+  font-size: 42px;
+  font-weight: 500;
+  line-height: 50px;
+  white-space: nowrap;
+}
+
+/* Figma sizes the one-line title box up to whole pixels. */
+@supports (width: calc-size(max-content, size)) {
+  .title {
+    width: calc-size(max-content, round(up, size, 1px));
+  }
+}
+
+/* `pre-wrap` keeps the design's line breaks and the leading spaces that
+   nudge some centred lines. */
+.description {
+  width: 786px;
+  font-size: 16px;
+  line-height: 28px;
+  text-align: center;
+  white-space: pre-wrap;
+}
+
+/* ---- Responsive (desktop design above is untouched) ---- */
+@media (max-width: 1199px) {
+  .title {
+    width: auto;
+    text-align: center;
+    text-wrap: balance;
+    white-space: normal;
+  }
+}
+
+@media (max-width: 1023px) {
+  .content,
+  .description {
+    width: 100%;
+  }
+
+  .content {
+    max-width: 839px;
+    translate: none;
+  }
+}
+
+@media (max-width: 639px) {
+  .intro {
+    padding-top: 120px;
+  }
+
+  .content {
+    gap: 24px;
+  }
+
+  .title {
+    font-size: 30px;
+    line-height: 38px;
+  }
+
+  .description {
+    font-size: 15px;
+    line-height: 26px;
+  }
+}

@@ -1,0 +1,32 @@
+.badge {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  width: 169px;
+  height: 57px;
+  padding: 12px 13px;
+  border-radius: 12px;
+  color: var(--color-white);
+}
+
+.dark {
+  background: var(--color-heading);
+}
+
+.primary {
+  background: var(--color-primary);
+}
+
+.value {
+  font-size: 18px;
+  font-weight: 600;
+  line-height: 21.6px;
+  white-space: nowrap;
+}
+
+.caption {
+  font-size: 10px;
+  line-height: 21.6px;
+  color: var(--color-primary-light);
+  white-space: nowrap;
+}

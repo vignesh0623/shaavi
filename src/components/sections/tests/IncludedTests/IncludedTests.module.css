@@ -1,0 +1,56 @@
+.included {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 16px;
+}
+
+/* The design's list is 841px of the 912px column. Rows with a second line
+   keep both cards of a row the same height. */
+.grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 15px 12px;
+  width: 841px;
+  max-width: 100%;
+}
+
+.item {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 12px;
+  border-radius: 12px;
+  background: rgb(255 255 255 / 0.6);
+}
+
+.row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+/* Fills the row (instead of hugging one line) so long names can wrap. */
+.name {
+  width: auto;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 20px;
+  color: var(--color-description);
+}
+
+/* Under the name, past the tick. */
+.tests {
+  width: auto;
+  padding-left: 24px;
+  font-size: 12px;
+  line-height: 18px;
+  color: var(--color-description);
+}
+
+@media (max-width: 639px) {
+  .grid {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 12px;
+  }
+}

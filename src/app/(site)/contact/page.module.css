@@ -1,0 +1,5 @@
+/* `isolation` keeps the glow at the top (z-index: -1) above the page
+   background. */
+.page {
+  isolation: isolate;
+}

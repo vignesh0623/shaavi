@@ -1,0 +1,22 @@
+/* `isolation` keeps the glow at the top (z-index: -1) above the page
+   background. */
+.page {
+  isolation: isolate;
+}
+
+/* Page rhythm: the gap above "Other Tests You May Need", from the Figma frame. */
+.related {
+  margin-top: 51px;
+}
+
+@media (max-width: 1023px) {
+  .related {
+    margin-top: 56px;
+  }
+}
+
+@media (max-width: 639px) {
+  .related {
+    margin-top: 48px;
+  }
+}

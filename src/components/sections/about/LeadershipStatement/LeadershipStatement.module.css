@@ -1,0 +1,88 @@
+.section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 40px;
+  padding: 60px 80px;
+  text-align: center;
+  background: var(--color-white);
+}
+
+.statement {
+  width: 1065px;
+  max-width: 100%;
+  font-size: 22px;
+  font-weight: 500;
+  line-height: 37px;
+}
+
+.highlights {
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  gap: 32px;
+  width: 1052px;
+  max-width: 100%;
+  padding: 41px 42px;
+  border-radius: 32px;
+  background: var(--color-primary-06);
+}
+
+.highlight {
+  display: flex;
+  flex: 1 0 0;
+  flex-direction: column;
+  align-items: center;
+  gap: 24px;
+  min-width: 1px;
+}
+
+.title {
+  font-size: 20px;
+  font-weight: 700;
+  line-height: 62px;
+  color: var(--color-primary);
+  white-space: nowrap;
+}
+
+.description {
+  width: 100%;
+  font-size: 14px;
+  line-height: 22px;
+  color: var(--color-description);
+}
+
+/* ---- Responsive (desktop design above is untouched) ---- */
+@media (max-width: 1199px) {
+  .section {
+    padding-inline: var(--gutter);
+  }
+}
+
+/* Stacked below 900px, where the longest title (one line) no longer fits a
+   third of the box. */
+@media (max-width: 899px) {
+  .highlights {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 28px;
+    padding: 32px 24px;
+    border-radius: 24px;
+  }
+
+  .highlight {
+    gap: 16px;
+  }
+}
+
+@media (max-width: 767px) {
+  .section {
+    gap: 32px;
+    padding-block: 0;
+  }
+
+  .statement {
+    font-size: 18px;
+    line-height: 30px;
+  }
+}

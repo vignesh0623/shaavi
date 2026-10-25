@@ -1,0 +1,431 @@
+.root {
+  position: relative;
+  width: 100%;
+}
+
+/*
+ * Wider than the bar and centred under it, over the category cards and the
+ * next section. It never runs past the bottom of the screen: opening it
+ * scrolls the page up to the bar, and past that its contents scroll.
+ */
+.panel {
+  --panel-width: min(900px, 100vw - 2 * var(--gutter));
+
+  position: absolute;
+  top: calc(100% + 12px);
+  left: 50%;
+  z-index: 20;
+  display: flex;
+  flex-direction: column;
+  width: var(--panel-width);
+  max-height: min(640px, 100dvh - 120px);
+  margin-left: calc(var(--panel-width) / -2);
+  overflow: hidden;
+  border-radius: 30px;
+  background: var(--color-white);
+  box-shadow:
+    0 0 0 1px var(--color-primary-10),
+    0 32px 64px -24px rgb(0 60 90 / 0.3);
+  animation: panel-in 0.3s var(--ease-soft) both;
+}
+
+@keyframes panel-in {
+  from {
+    opacity: 0;
+    translate: 0 -8px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .panel {
+    animation-name: panel-fade;
+  }
+}
+
+@keyframes panel-fade {
+  from {
+    opacity: 0;
+  }
+}
+
+.scroller {
+  min-height: 0;
+  padding: 24px;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+}
+
+.listbox {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.listbox[hidden] {
+  display: none;
+}
+
+.group {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  min-width: 0;
+}
+
+.heading {
+  display: flex;
+  gap: 6px;
+  padding: 0 12px 12px;
+  font-size: 12px;
+  font-weight: 600;
+  line-height: 16px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--color-description);
+}
+
+.count {
+  color: var(--color-placeholder);
+}
+
+/* ---- Categories ---- */
+
+.chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  padding: 0 12px;
+}
+
+.chip {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  height: 40px;
+  padding: 0 16px 0 6px;
+  border-radius: var(--radius-full);
+  background: var(--color-primary-06);
+  font-size: 13px;
+  line-height: 18px;
+  white-space: nowrap;
+  transition: background-color 0.2s ease;
+}
+
+.chip[aria-selected="true"] {
+  background: var(--color-primary-15);
+}
+
+.chipMedia {
+  display: flex;
+  flex-shrink: 0;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  overflow: hidden;
+  border-radius: 50%;
+  background: var(--color-white);
+}
+
+.chipImage {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.chipName {
+  font-weight: 500;
+  color: var(--color-heading);
+}
+
+.chipCount {
+  color: var(--color-placeholder);
+}
+
+/* ---- Tests and profiles ---- */
+
+/* Side by side, as many as there are, with a line between them. */
+.columns {
+  display: grid;
+  grid-auto-columns: minmax(0, 1fr);
+  grid-auto-flow: column;
+}
+
+.column + .column {
+  padding-left: 16px;
+  margin-left: 16px;
+  box-shadow: inset 1px 0 var(--color-primary-10);
+}
+
+/* Photo and price line up with the name; a profile's tests run below. */
+.result {
+  display: grid;
+  grid-template-columns: 56px minmax(0, 1fr) auto;
+  align-items: start;
+  gap: 14px;
+  padding: 10px 12px;
+  border-radius: 20px;
+  transition: background-color 0.2s ease;
+}
+
+.result[aria-selected="true"],
+.more[aria-selected="true"] {
+  background: var(--color-primary-06);
+}
+
+.thumb {
+  width: 56px;
+  height: 56px;
+  border-radius: 14px;
+  object-fit: cover;
+}
+
+.details {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  min-width: 0;
+}
+
+.name {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  line-clamp: 2;
+  overflow: hidden;
+  font-size: 15px;
+  font-weight: 500;
+  line-height: 20px;
+  color: var(--color-heading);
+}
+
+.match {
+  border-radius: 3px;
+  background: var(--color-primary-15);
+  color: inherit;
+}
+
+.meta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 2px 6px;
+  font-size: 12px;
+  line-height: 16px;
+  color: var(--color-muted);
+}
+
+.kind {
+  padding: 1px 8px;
+  border-radius: var(--radius-full);
+  background: var(--color-primary-10);
+  font-size: 11px;
+  font-weight: 500;
+  color: var(--color-heading);
+}
+
+/* A few of a profile's tests, ticked as on its page, matches first. */
+.included {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 4px 12px;
+  margin-top: 4px;
+  font-size: 12px;
+  line-height: 18px;
+}
+
+.includedItem {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  min-width: 0;
+  max-width: 100%;
+  color: var(--color-description);
+}
+
+.includedItem > img {
+  flex-shrink: 0;
+}
+
+.includedName {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* Wraps rather than cutting off the part that matched. */
+.matched {
+  align-items: flex-start;
+  font-weight: 500;
+  color: var(--color-heading);
+}
+
+.matched > img {
+  margin-top: 2px;
+}
+
+.matched .includedName {
+  white-space: normal;
+}
+
+/* Always on a line of its own, under the tests. */
+.viewAll {
+  display: flex;
+  flex-basis: 100%;
+  align-items: center;
+  gap: 6px;
+  font-weight: 500;
+  color: var(--color-heading);
+  white-space: nowrap;
+}
+
+.viewAll > img {
+  transition: translate 0.2s ease;
+}
+
+.result[aria-selected="true"] .viewAll > img {
+  translate: 3px 0;
+}
+
+.price {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 2px;
+  white-space: nowrap;
+}
+
+.current {
+  font-size: 15px;
+  font-weight: 700;
+  line-height: 20px;
+  color: var(--color-heading);
+}
+
+.original {
+  font-size: 12px;
+  font-weight: 300;
+  line-height: 16px;
+  color: var(--color-strike);
+}
+
+.more {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 4px;
+  padding: 12px;
+  border-radius: 16px;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 20px;
+  color: var(--color-heading);
+  transition: background-color 0.2s ease;
+}
+
+/* ---- Nothing found ---- */
+
+.empty {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 14px;
+  padding: 24px 12px;
+  text-align: center;
+}
+
+.emptyTitle {
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 24px;
+}
+
+.emptyText {
+  font-size: 14px;
+  line-height: 22px;
+  color: var(--color-muted);
+}
+
+.emptyLinks {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 8px;
+  margin-top: 6px;
+}
+
+.emptyLink {
+  padding: 10px 18px;
+  border-radius: var(--radius-full);
+  background: var(--color-primary-06);
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 20px;
+  transition: background-color 0.2s ease;
+}
+
+.emptyLink:hover {
+  background: var(--color-primary-15);
+}
+
+/* ---- Responsive ---- */
+
+/* One column: tests above profiles. */
+@media (max-width: 767px) {
+  .columns {
+    grid-auto-flow: row;
+    gap: 16px;
+  }
+
+  .column + .column {
+    padding: 16px 0 0;
+    margin: 0;
+    box-shadow: inset 0 1px var(--color-primary-10);
+  }
+}
+
+@media (max-width: 639px) {
+  .panel {
+    top: calc(100% + 8px);
+    border-radius: 24px;
+  }
+
+  .scroller {
+    padding: 16px 8px;
+  }
+
+  .result {
+    grid-template-columns: 48px minmax(0, 1fr) auto;
+    gap: 12px;
+    padding: 10px 8px;
+  }
+
+  .thumb {
+    width: 48px;
+    height: 48px;
+    border-radius: 12px;
+  }
+
+  .name {
+    font-size: 14px;
+  }
+
+  .heading {
+    padding-inline: 8px;
+  }
+
+  /* One row that swipes sideways, so the results stay near the top. */
+  .chips {
+    flex-wrap: nowrap;
+    margin-inline: -8px;
+    padding-inline: 16px;
+    overflow-x: auto;
+    scroll-padding-inline: 16px;
+    scrollbar-width: none;
+  }
+
+  .chip {
+    flex-shrink: 0;
+  }
+}

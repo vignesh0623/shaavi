@@ -1,0 +1,63 @@
+.list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  width: 900px;
+  max-width: calc(100% - 2 * var(--gutter));
+  margin-inline: auto;
+}
+
+/* Fills the row (instead of hugging one line) so long questions can wrap. */
+.question {
+  display: block;
+  width: auto;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: normal;
+  /* The design's question cards resolve "Greys/Heading" to #222. */
+  color: #222222;
+}
+
+.number {
+  color: var(--color-primary);
+}
+
+.answer {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+/* Keeps the design's hand-placed line breaks and indents. */
+.block {
+  font-size: 12px;
+  line-height: 19px;
+  color: var(--color-description);
+  white-space: pre-wrap;
+}
+
+.accent {
+  font-weight: 500;
+  color: var(--color-primary);
+}
+
+.emphasis {
+  font-weight: 500;
+  color: var(--color-heading);
+}
+
+.link:hover {
+  text-decoration: underline;
+}
+
+@media (max-width: 639px) {
+  .question {
+    font-size: 15px;
+    line-height: 22px;
+  }
+
+  .block {
+    font-size: 13px;
+    line-height: 21px;
+  }
+}

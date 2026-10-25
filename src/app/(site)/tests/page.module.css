@@ -1,0 +1,24 @@
+/* Page rhythm: the gaps between sections, taken from the Figma frame. */
+.catalog {
+  margin-top: 54px;
+}
+
+.cta {
+  margin-top: 53px;
+}
+
+@media (max-width: 1023px) {
+  .catalog {
+    margin-top: 48px;
+  }
+
+  .cta {
+    margin-top: 40px;
+  }
+}
+
+@media (max-width: 639px) {
+  .catalog {
+    margin-top: 40px;
+  }
+}

@@ -1,0 +1,97 @@
+.card {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 30px;
+  height: 100%;
+  padding: 18px;
+  overflow: clip;
+  border-radius: 30px;
+  /* The design's 5% tint, painted over white so the 3D layer behind the page
+     doesn't show through the text. */
+  background: linear-gradient(var(--color-primary-05) 0 0), var(--color-white);
+}
+
+/* A link to the entry's page, as is the name. */
+.media {
+  position: relative;
+  display: block;
+  flex-shrink: 0;
+  width: 100%;
+  height: 140px;
+  overflow: hidden;
+  border-radius: 20px;
+}
+
+.image {
+  object-fit: cover;
+}
+
+.body {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 18px;
+  width: 100%;
+}
+
+.heading {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 12px;
+  width: 100%;
+}
+
+.name {
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 30px;
+}
+
+.nameLink {
+  transition: color 0.2s ease;
+}
+
+.nameLink:hover {
+  color: var(--color-primary);
+}
+
+/*
+ * Two lines at most. Clipping would cut the descenders off text trimmed with
+ * `text-box`, so the trim is done with margins instead (as in globals.css).
+ */
+.description {
+  --half-leading: calc((1lh - (var(--font-ascent) + var(--font-descent)) * 1em) / 2);
+
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  line-clamp: 2;
+  width: 100%;
+  height: auto;
+  margin-block: calc(-1 * var(--half-leading) - (var(--font-ascent) - var(--font-cap-height)) * 1em)
+    calc(-1 * var(--half-leading) - var(--font-descent) * 1em);
+  overflow: hidden;
+  font-size: 11px;
+  line-height: normal;
+  color: var(--color-description);
+  text-box: none;
+}
+
+/* Label on the left, arrow chip on the right, pinned to the card's foot. */
+.card .action {
+  justify-content: space-between;
+  margin-top: auto;
+  padding-right: 6px;
+}
+
+/* ---- Responsive (desktop design above is untouched) ---- */
+
+/* Two or one to a row on tablets and phones, the cards are wider and the
+   design's 11px description reads small; 12px there. */
+@media (max-width: 1023px) {
+  .description {
+    font-size: 12px;
+  }
+}

@@ -1,0 +1,129 @@
+/* White cells with hairline row dividers and a rounded outline; the two
+   columns share the width and have no divider between them. */
+.table {
+  --line: var(--color-stroke);
+
+  width: 100%;
+  table-layout: fixed;
+  border-collapse: separate;
+  border-spacing: 0;
+}
+
+/* Figma strokes take up no space, so the hairlines are inset shadows
+   rather than borders and the text keeps its exact position. */
+.label,
+.value {
+  padding: 0 16px;
+  background: var(--color-white);
+  text-align: left;
+  vertical-align: middle;
+  text-box: trim-both cap alphabetic;
+}
+
+.md :is(.label, .value) {
+  height: 48px;
+}
+
+.lg :is(.label, .value) {
+  height: 56px;
+}
+
+.label {
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 20px;
+  color: var(--color-heading);
+  box-shadow:
+    inset 0.5px 0 var(--line),
+    inset 0 -0.5px var(--line);
+}
+
+.value {
+  font-size: 12px;
+  line-height: 18.75px;
+  color: var(--color-description);
+  box-shadow:
+    inset -0.5px 0 var(--line),
+    inset 0 -0.5px var(--line);
+}
+
+tr:first-child > .label {
+  border-top-left-radius: 12px;
+  box-shadow:
+    inset 0.5px 0 var(--line),
+    inset 0 -0.5px var(--line),
+    inset 0 0.5px var(--line);
+}
+
+tr:first-child > .value {
+  border-top-right-radius: 12px;
+  box-shadow:
+    inset -0.5px 0 var(--line),
+    inset 0 -0.5px var(--line),
+    inset 0 0.5px var(--line);
+}
+
+tr:last-child > .label {
+  border-bottom-left-radius: 12px;
+}
+
+tr:last-child > .value {
+  border-bottom-right-radius: 12px;
+}
+
+/* ---- Responsive (desktop design above is untouched) ---- */
+/* Long values wrap, so rows grow from their minimum height. */
+@media (max-width: 1023px) {
+  .label,
+  .value {
+    padding-block: 14px;
+  }
+}
+
+/* Stack each label above its value. */
+@media (max-width: 639px) {
+  .table,
+  .table tbody {
+    display: block;
+  }
+
+  .table tr {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding: 14px 16px;
+    background: var(--color-white);
+    box-shadow:
+      inset 0.5px 0 var(--line),
+      inset -0.5px 0 var(--line),
+      inset 0 -0.5px var(--line);
+  }
+
+  .table tr:first-child {
+    border-radius: 12px 12px 0 0;
+    box-shadow:
+      inset 0.5px 0 var(--line),
+      inset -0.5px 0 var(--line),
+      inset 0 -0.5px var(--line),
+      inset 0 0.5px var(--line);
+  }
+
+  .table tr:last-child {
+    border-radius: 0 0 12px 12px;
+  }
+
+  /* Outranks the size and first/last-row rules above. */
+  .table tr > :is(.label, .value) {
+    display: block;
+    height: auto;
+    padding: 0;
+    border-radius: 0;
+    background: none;
+    box-shadow: none;
+  }
+
+  .value {
+    font-size: 13px;
+    line-height: 20px;
+  }
+}

@@ -1,0 +1,117 @@
+.header {
+  position: absolute;
+  inset: 0 0 auto;
+  z-index: 10;
+  background: rgb(255 255 255 / 0.15);
+}
+
+.inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  max-width: var(--page-width);
+  margin: 0 auto;
+  padding: 20px var(--gutter);
+}
+
+.menu {
+  display: flex;
+  align-items: center;
+  gap: 36px;
+  font-size: 15px;
+  line-height: 20px;
+  white-space: nowrap;
+}
+
+/* On touch screens a tap may land half-way to the next link (36px). */
+.link {
+  --tap-x: 18px;
+
+  display: block;
+  color: var(--color-heading);
+  transition: color 0.2s ease;
+}
+
+.link:hover,
+.active {
+  color: var(--color-primary);
+}
+
+/* Menu button — only shown below 1024px */
+.toggle {
+  display: none;
+}
+
+@media (max-width: 1023px) {
+  .inner {
+    gap: 12px;
+  }
+
+  .inner > :first-child {
+    margin-right: auto;
+  }
+
+  .nav {
+    order: 3;
+  }
+
+  .toggle {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 5px;
+    width: 38px;
+    height: 38px;
+    padding: 0 10px;
+    border-radius: var(--radius-full);
+    background: var(--color-primary-15);
+  }
+
+  .toggle span {
+    height: 2px;
+    border-radius: 2px;
+    background: var(--color-heading);
+    transition:
+      transform 0.2s ease,
+      opacity 0.2s ease;
+  }
+
+  .toggleOpen span:nth-child(1) {
+    transform: translateY(7px) rotate(45deg);
+  }
+
+  .toggleOpen span:nth-child(2) {
+    opacity: 0;
+  }
+
+  .toggleOpen span:nth-child(3) {
+    transform: translateY(-7px) rotate(-45deg);
+  }
+
+  .menu {
+    position: absolute;
+    top: 100%;
+    right: 0;
+    left: 0;
+    display: none;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0;
+    padding: 8px var(--gutter) 16px;
+    background: var(--color-white);
+    box-shadow: 0 12px 24px rgb(0 0 0 / 0.08);
+  }
+
+  .menuOpen {
+    display: flex;
+  }
+
+  /* 48px tall and touching, so no reach beyond the link. */
+  .menu .link {
+    --tap-x: 0px;
+    --tap-y: 0px;
+
+    width: auto;
+    padding: 14px 0;
+  }
+}

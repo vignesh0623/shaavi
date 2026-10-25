@@ -1,0 +1,95 @@
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  min-width: 0;
+}
+
+/* Figma "Input Box": icon and text over a hairline, 40px tall (70px for a
+   message). Figma strokes take up no space, so the line is an inset shadow;
+   it thickens to 2px under the field being typed in. */
+.box {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  height: 40px;
+  box-shadow: inset 0 -1px 0 var(--color-field-line);
+  cursor: text;
+  transition: box-shadow 0.2s ease;
+}
+
+.box:focus-within {
+  box-shadow: inset 0 -2px 0 var(--color-primary);
+}
+
+.invalid .box {
+  box-shadow: inset 0 -1px 0 var(--color-error);
+}
+
+.invalid .box:focus-within {
+  box-shadow: inset 0 -2px 0 var(--color-error);
+}
+
+/*
+ * Inputs ignore `text-box`, so the trim is done by hand (as in SearchBar):
+ * the line box is the font's content area and the margins cut it down to the
+ * cap-height → baseline band that the design centres.
+ */
+.input {
+  flex: 1 1 auto;
+  min-width: 0;
+  height: calc((var(--font-ascent) + var(--font-descent)) * 1em);
+  margin-block: calc((var(--font-cap-height) - var(--font-ascent)) * 1em)
+    calc(-1 * var(--font-descent) * 1em);
+  padding: 0;
+  border: 0;
+  background: none;
+  font: inherit;
+  font-size: 13px;
+  line-height: calc((var(--font-ascent) + var(--font-descent)) * 1em);
+  color: var(--color-heading);
+  outline: none;
+}
+
+.input::placeholder {
+  color: var(--color-placeholder);
+  opacity: 1;
+}
+
+/* Message box: the first line sits beside the icon, 12px from the top, and
+   longer messages scroll within the 70px. */
+.multiline .box {
+  align-items: flex-start;
+  height: 70px;
+  padding-top: 12px;
+}
+
+.multiline .input {
+  --line: 17px;
+
+  align-self: stretch;
+  height: auto;
+  /* Puts the first line's capitals where the design centres them on the
+     16px icon; later lines follow at the design's 17px. */
+  margin-block: calc(8px - (var(--font-cap-height) * 1em) / 2 - (var(--line) - (var(--font-ascent) + var(--font-descent)) * 1em) / 2 - (var(--font-ascent) - var(--font-cap-height)) * 1em) 0;
+  padding-bottom: 6px;
+  line-height: var(--line);
+  resize: none;
+}
+
+/* iOS zooms the page in on form text under 16px. */
+@media (pointer: coarse) {
+  .input {
+    font-size: 16px;
+  }
+
+  .multiline .input {
+    --line: 21px;
+  }
+}
+
+.error {
+  font-size: 12px;
+  line-height: 16px;
+  color: var(--color-error);
+}

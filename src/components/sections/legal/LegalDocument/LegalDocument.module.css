@@ -1,0 +1,176 @@
+/* The design's 1292px column sits 1px right of centre. */
+.document {
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+  width: 1292px;
+  max-width: calc(100% - 2 * var(--gutter));
+  margin-inline: auto;
+  translate: 1px 0;
+}
+
+/* ---- Key details (heading, table and note) ---- */
+.summary {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 26px;
+}
+
+.summaryTitle {
+  width: 786px;
+  max-width: 100%;
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 28px;
+  color: var(--color-primary);
+  text-align: center;
+}
+
+.summaryNote {
+  font-size: 14px;
+  font-style: italic;
+  line-height: 28px;
+  color: var(--color-description);
+  text-align: center;
+}
+
+/* ---- Numbered sections ---- */
+.section {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.heading {
+  font-size: 18px;
+  font-weight: 700;
+  line-height: 60px;
+}
+
+/* Figma measures text a hair narrower than browsers do, so a line that
+   just fits in the design could wrap a word early here. One pixel of
+   extra room keeps the design's line breaks (no other line is within
+   3px of wrapping differently). */
+.text,
+.list {
+  width: calc(100% + 1px);
+  font-size: 14px;
+  line-height: 21px;
+  color: var(--color-description);
+}
+
+/* `pre-wrap` keeps the design's line breaks, blank lines and indents. */
+.text {
+  white-space: pre-wrap;
+}
+
+.relaxed {
+  line-height: 26px;
+}
+
+/* Words the design joins with non-breaking spaces (see LegalDocument.tsx). */
+.joined {
+  white-space: nowrap;
+}
+
+.medium {
+  font-weight: 500;
+}
+
+.semibold {
+  font-weight: 600;
+}
+
+.bold {
+  font-weight: 700;
+}
+
+/* Small heading over a paragraph. */
+.topic {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.subheading {
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 21px;
+}
+
+/* As in the design, items are indented 21px with the bullet centred in the
+   indent. The list is trimmed like other text (see globals.css). */
+.list {
+  list-style: none;
+  text-box: trim-both cap alphabetic;
+}
+
+.list li {
+  position: relative;
+  padding-left: 21px;
+}
+
+.list li::before {
+  content: "•";
+  position: absolute;
+  left: 0;
+  width: 21px;
+  text-align: center;
+}
+
+@supports not (text-box: trim-both cap alphabetic) {
+  .list {
+    --half-leading: calc((1lh - (var(--font-ascent) + var(--font-descent)) * 1em) / 2);
+    margin-block: calc(-1 * var(--half-leading) - (var(--font-ascent) - var(--font-cap-height)) * 1em)
+      calc(-1 * var(--half-leading) - var(--font-descent) * 1em);
+  }
+}
+
+@supports (height: calc-size(auto, size)) {
+  .list {
+    height: calc-size(auto, round(size, 1px));
+    min-height: 0;
+  }
+}
+
+.closing {
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 21px;
+}
+
+/* ---- Responsive (desktop design above is untouched) ---- */
+@media (max-width: 1023px) {
+  .document {
+    translate: none;
+  }
+
+  /* Headings may wrap here; keep their lines close. */
+  .heading {
+    line-height: 26px;
+  }
+}
+
+@media (max-width: 639px) {
+  .document {
+    gap: 32px;
+  }
+
+  .section {
+    gap: 20px;
+  }
+
+  .heading {
+    font-size: 17px;
+  }
+
+  .summaryNote {
+    line-height: 22px;
+  }
+
+  /* Some joined groups are wider than a phone screen. */
+  .joined {
+    white-space: inherit;
+  }
+}
